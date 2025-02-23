@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const handleDesignsClick = () => {
+    setShowDropdown(!showDropdown);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div>
+      {/* Navbar */}
+      <nav className="navbar">
+        <div className="navbar-left">
+          {/* Logo for UCLA*/}
+          <img
+            src="/campus-seal.jpg" 
+            alt="UCLA Logo"
+            className="navbar-logo"
+          />
+          <a href="/" className="nav-link">Home</a>
+          <div className="dropdown">
+            <button className="nav-link" onClick={handleDesignsClick}>
+              Designs
+            </button>
+            {showDropdown && (
+              <div className="dropdown-content">
+                <a href="/templates">Templates</a>
+                <a href="/create-your-own">Create Your Own</a>
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="navbar-right">
+          <button className="nav-button" onClick={() => alert("Login clicked!")}>
+            Login
+          </button>
+          <button className="nav-button" onClick={() => alert("Sign Up clicked!")}>
+            Sign Up
+          </button>
+        </div>
+      </nav>
+
+      {/* content for the center page */}
+      <div className="get-started-container">
+        <h1>Welcome to UCLA Room Design</h1>
+        <p>Create and design your dream room today!</p>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
