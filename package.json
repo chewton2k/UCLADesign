@@ -5,7 +5,7 @@
   },
   "scripts": {
     "start:frontend": "npm run dev --prefix frontend",
-    "start:backend": "node server/app.js",
+    "start:backend": "node backend/App.jsx",
     "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\""
   },
   "devDependencies": {
