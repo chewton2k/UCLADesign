@@ -1,13 +1,10 @@
 import React from 'react';
+import HeroSection from './HeroSection';
 
 const HomePageMiddle = () => {
   return (
-    <div className="flex justify-center items-center">
-      <img 
-        src="/campus-seal.jpg" 
-        alt="Campus Seal" 
-        className="w-64 h-auto rounded-lg shadow-lg"
-      />
+    <div>
+      <HeroSection />
     </div>
   );
 };

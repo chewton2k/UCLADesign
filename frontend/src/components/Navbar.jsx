@@ -13,7 +13,7 @@ const Navbar = () => {
         alt="Campus Seal" 
         className="w-16 h-auto rounded-lg shadow-lg"
       />
-      <Link to="/" className="text-xl font-bold hover:text-gray-300">
+      <Link to="/" className="text-xl font-bold hover:opacity-80">
         Home
       </Link>
       <DropdownMenu />
@@ -21,10 +21,10 @@ const Navbar = () => {
 
       {/* Right-side buttons */}
       <div className="flex items-center space-x-4">
-        <Link to="/login" className="px-4 py-2 bg-amber-300 rounded-lg hover:bg-amber-400">
+        <Link to="/login" className="px-4 py-2 bg-blue-600 rounded-lg hover:opacity-80">
           Log In
         </Link>
-        <Link to="/signup" className="px-4 py-2 bg-amber-300 rounded-lg hover:bg-amber-400">
+        <Link to="/signup" className="px-4 py-2 bg-blue-600 rounded-lg hover:opacity-80">
           Sign Up
         </Link>
       </div>
