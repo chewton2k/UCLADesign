@@ -1,54 +1,20 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './App.css';
+import HomePage from './pages/HomePage.jsx';
 
 function App() {
-  const [showDropdown, setShowDropdown] = useState(false);
-
-  const handleDesignsClick = () => {
-    setShowDropdown(!showDropdown);
-  };
-
-  return (
-    <div>
-      {/* Navbar */}
-      <nav className="navbar">
-        <div className="navbar-left">
-          {/* Logo for UCLA*/}
-          <img
-            src="/campus-seal.jpg" 
-            alt="UCLA Logo"
-            className="navbar-logo"
-          />
-          <a href="/" className="nav-link">Home</a>
-          <div className="dropdown">
-            <button className="nav-link" onClick={handleDesignsClick}>
-              Designs
-            </button>
-            {showDropdown && (
-              <div className="dropdown-content">
-                <a href="/templates">Templates</a>
-                <a href="/create-your-own">Create Your Own</a>
-              </div>
-            )}
-          </div>
-        </div>
-        <div className="navbar-right">
-          <button className="nav-button" onClick={() => alert("Login clicked!")}>
-            Login
-          </button>
-          <button className="nav-button" onClick={() => alert("Sign Up clicked!")}>
-            Sign Up
-          </button>
-        </div>
-      </nav>
-
-      {/* content for the center page */}
-      <div className="get-started-container">
-        <h1>Welcome to UCLA Room Design</h1>
-        <p>Create and design your dream room today!</p>
-      </div>
-    </div>
-  );
+    return (
+        <Router>
+            <Routes>
+                <Route path='/' element={<HomePage />} />
+                <Route path='/templates' element={<HomePage/>}> </Route>
+                <Route path='/create-design' element={<HomePage/>}> </Route>
+                <Route path='/login' element={<HomePage/>}> </Route>
+                <Route path='/signup' element={<HomePage/>}> </Route>
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;

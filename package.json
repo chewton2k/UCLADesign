@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "@tailwindcss/vite": "^4.0.8",
+    "express": "^4.21.2"
+  },
+  "scripts": {
+    "start:frontend": "npm run dev --prefix frontend",
+    "start:backend": "node server/app.js",
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\""
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.0.8"
+  }
+}
