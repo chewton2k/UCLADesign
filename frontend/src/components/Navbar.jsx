@@ -9,8 +9,8 @@ const Navbar = () => {
       
       <div className="flex items-center space-x-4">
       <img 
-        src="/campus-seal.jpg" 
-        alt="Campus Seal" 
+        src="/ucla-logo.jpg" 
+        alt="UCLA Logo" 
         className="w-16 h-auto rounded-lg shadow-lg"
       />
       <Link to="/" className="text-xl font-bold hover:opacity-80">
