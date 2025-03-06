@@ -24,7 +24,7 @@ const DropdownMenu = () => {
             to="/create-design" 
             className="block px-4 py-2 hover:opacity-80"
           >
-            Create Your Own Design
+            Create Your Own Design (coming soon)
           </Link>
         </div>
       )}
