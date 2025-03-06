@@ -6,8 +6,7 @@ const HomePageMiddle = () => {
   return (
     <div>
       <HeroSection />
-      <PlanExpSection/>
-
+      <PlanExpSection/> 
       {/* Separator for the last section and footer*/}
       <div className="py-40"></div>
     </div>
