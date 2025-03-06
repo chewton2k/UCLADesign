@@ -5,13 +5,17 @@ import HomePageBottom from "../components/HomePageBottom";
 
 const RegistrationPage = () => {
     return (
-        <>
+        <div>
             <HomePageTop/> 
             <RegistrationForm/>
-            <div className="relative inset-0 flex items-center justify-center z-20" > <p className="font-bold text-s">By signing up you agree with our Terms of Service and Privacy Policy.</p></div>
+            <div className="relative inset-0 flex items-center justify-center z-20" > <p className="font-bold text-s">
+                By signing up you agree with our Terms of Service and Privacy Policy.
+                </p></div>
+            {/* Separator for the last section and footer*/}
+            <div className="py-40"></div>
             <HomePageBottom/>
-        </>
-    )
-}
+        </div>
+    );
+};
 
 export default RegistrationPage
