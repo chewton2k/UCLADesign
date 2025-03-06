@@ -6,23 +6,20 @@ const DropdownMenu = () => {
 
   return (
     <div className="relative z-20">
-      <button 
-        onClick={() => setIsOpen(!isOpen)} 
-        className="px-4 py-2 text-white bg-gray-800 rounded-lg hover:opacity-80"
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="px-4 py-2 text-white bg-gray-800 rounded-lg hover:opacity-80 font-light"
       >
         Designs ▼
       </button>
       {isOpen && (
-        <div className="absolute left-0 mt-2 w-48 bg-gray-800 border border-gray-300 shadow-lg rounded-lg">
-          <Link 
-            to="/templates" 
-            className="block px-4 py-2 hover:opacity-80"
-          >
+        <div className="absolute left-0 mt-3top-full w-60 bg-gray-800 border border-gray-300 shadow-lg rounded-lg">
+          <Link to="/templates" className="block px-4 py-2 hover:opacity-60 font-light">
             Templates
           </Link>
-          <Link 
-            to="/create-design" 
-            className="block px-4 py-2 hover:opacity-80"
+          <Link
+            to="/create-design"
+            className="block px-4 py-2 hover:opacity-60 font-light"
           >
             Create Your Own Design (coming soon)
           </Link>
