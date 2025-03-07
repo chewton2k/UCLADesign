@@ -9,7 +9,7 @@ const LogInPage = () => {
             <HomePageTop/> 
             <LogInForm/>
             {/* Separator for the last section and footer*/}
-            <div className="py-40"></div>
+            <div className="py-54"></div>
             <HomePageBottom/>
         </div>
     );
