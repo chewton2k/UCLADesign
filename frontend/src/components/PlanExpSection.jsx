@@ -35,16 +35,16 @@ const PlanExpSection = () => {
   }, []);
 
   return (
-    <div ref={sectionRef} className="py-16">
+    <div ref={sectionRef} className="py-16 bg-gray-900 h-125">
       {/* Title Section */}
       <div className="text-center mb-8">
-        <h1 className="text-4xl font-semibold text-black text-left px-45">
+        <h1 className="text-4xl font-semibold text-white text-left px-45">
           Plan your college experience
         </h1>
       </div>
 
       {/* Image Slider */}
-      <div className="bg-gray-900 h-80 py-10">
+      <div className="py-10">
       <div className="overflow-hidden w-full relative">
         <div
           className="flex space-x-6 transition-transform ease-linear"
