@@ -1,15 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 
 const images = [
-  "/ucla-logo.jpg",
-  "/Olympic+Hall+room.jpg",
-  "/campus-seal.jpg",
-  "/ucla-logo.jpg",
-  "/Olympic+Hall+room.jpg",
-  "/campus-seal.jpg",
-  "/ucla-logo.jpg",
-  "/Olympic+Hall+room.jpg",
-  "/campus-seal.jpg",
+  "/image1.webp",
+  "/image2.webp",
+  "/image3.jpg",
+  "/image4.jpeg",
+  "/image5.jpg",
+  "/image6.jpg",
+  "/image7.png", 
+  "/image8.jpg", 
+  "/image9.jpeg", 
 ];
 
 const PlanExpSection = () => {
@@ -35,7 +35,7 @@ const PlanExpSection = () => {
   }, []);
 
   return (
-    <div ref={sectionRef} className="py-16 bg-gray-900 h-125">
+    <div ref={sectionRef} className="py-16 bg-gray-900 h-150">
       {/* Title Section */}
       <div className="text-center mb-8">
         <h1 className="text-4xl font-semibold text-white text-left px-45">
@@ -60,9 +60,42 @@ const PlanExpSection = () => {
           ))}
         </div>
       </div>
+      <div> 
+        <p className="py-14 font-mediumlight text-white px-45"> 
+        Use our interactive drag-and-drop tool to customize your dorm layout in 
+        real time. Arrange furniture, adjust room dimensions, and explore different 
+        setups with ease. Browse a searchable database of room designs and reviews 
+        from other students, and save your own layouts for future reference. Sign in to 
+        collaborate and share ideas with the UCLA community!
+        </p>
+      </div>
+      <div className="relative flex items-center justify-between px-45 py-15">
+        {/* Image on the left */}
+      <div className="flex items-center justify-end z-10 drop-shadow-2xl px-25">
+      <img
+          src="/image10.png"
+          alt="De Neve Plaza Layout"
+          className="size-100 rounded-lg border border-black shadow-5xl"
+        />
+      </div>
+      {/* Text Content on the right */}
+      <div className="text-left px-30 max-w-150">
+        <h1 className="text-4xl md:text-4xl font-semibold text-black">
+          How to make your room
+        </h1>
+        <p className="mt-4 text-lg md:text-l font-mediumlight text-black">
+          Just choose your floor, building and room to start! You can drag and drop items from our 
+          library into any room and change them out as needed. You can experiment with different layouts, 
+          furnishings, and finishes and get a preview of your finished room.
+        </p>
+      
+        </div>
+    </div>
       </div>
     </div>
   );
 };
 
 export default PlanExpSection;
+
+
