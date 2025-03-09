@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const { run } = require("./config/db");
 
+
 dotenv.config();
 run();
 
