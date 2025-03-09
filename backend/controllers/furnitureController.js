@@ -1,4 +1,4 @@
-const furniture = require("../models/Furniture");
+const Furniture = require("../models/Furniture");
 
 exports.getAllFurniture = async(req, res) => {
     try{
