@@ -66,10 +66,11 @@ Our project will include a database of UCLA dorm rooms with associated pricing i
 
 3. **.env** file:
    create an .env file in the root directory and copy over the following contents: 
-   ```
+
+```
   MONGO_URI=mongodb+srv://owenrfn:NW112ns@dormdesign.ud8dx.mongodb.net/?retryWrites=true&w=majority&appName=dormdesign
   PORT=5001
-   ```
+```
 
 
 # Running the Project
