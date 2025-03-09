@@ -1,4 +1,5 @@
 # UCLA Room Design Project
+![Image](https://github.com/user-attachments/assets/4af81b32-51c6-4a72-88a4-3ea38cebf67f)
 
 by Tommy Yu, Owen Fan, Alex Tamanaha, Charlton Shih, Fiona Zhang.
 
