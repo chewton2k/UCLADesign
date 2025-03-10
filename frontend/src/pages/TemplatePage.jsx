@@ -1,7 +1,7 @@
 import React from 'react';
 import HomePageTop from '../components/HomePageTop';
 import HomePageBottom from "../components/HomePageBottom";
-import TemplateGrid from '../components/TemplateGrid';
+import TemplateGrid from '../components/TemplateGrids';
 
 const TemplatePage = () => {
     return (
