@@ -6,7 +6,7 @@ import SignUpButton from './SignUpButton.jsx';
 
 const Navbar = () => {
   return (
-    <nav className="flex justify-between items-center bg-gray-900 text-white py-3 px-45 shadow-md">
+    <nav className="flex flex-wrap justify-between items-center bg-gray-900 text-white py-3 px-45 shadow-md">
       {/* Home Button */}
       
       <div className="flex items-center space-x-4">

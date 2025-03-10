@@ -8,7 +8,7 @@ const DropdownMenu = () => {
     <div className="relative z-20">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="px-4 py-2 text-white bg-gray-800 rounded-lg hover:opacity-80 font-light"
+        className="px-4 py-2 text-white bg-gray-800 rounded-lg hover:opacity-80 font-light text-center"
       >
         Designs ▼
       </button>
