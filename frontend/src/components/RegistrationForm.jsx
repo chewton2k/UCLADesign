@@ -1,37 +1,39 @@
 import React, { useState } from "react";
 
 const RegistrationForm = ({ formType }) => {
-    const [formData, setFormData] = useState({ name: "", email: "", password: "" });
-    const [error, setError] = useState(null);
+    const [formData, setFormData] = useState({ username: "", email: "", password: "" });
+    const [error, setError] = useState(""); // State to handle errors
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError(null); 
+        e.preventDefault(); // Prevent the default form submission behavior
 
         try {
-            const response = await fetch("http://localhost:5001/register", {
+            const response = await fetch("http://localhost:5001/api/users/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(formData), // Use formData from state
             });
 
-            const data = await response.json();
-
             if (!response.ok) {
-                throw new Error(data.message || "Registration failed");
+                const errorData = await response.json();
+                console.error("Registration failed:", errorData);
+                setError(errorData.message || "Registration failed"); // Set error message
+                return;
             }
 
-            alert(`${formType} Registered Successfully!`);
-            console.log(data); 
-        } catch (err) {
-            setError(err.message);
-            console.error("Error:", err);
+            const data = await response.json();
+            console.log("Registration successful:", data);
+            setError(""); // Clear any previous errors
+            alert("Registration successful!"); // Notify the user
+        } catch (error) {
+            console.error("Error during registration:", error);
+            setError("An error occurred during registration."); // Set error message
         }
     };
 
@@ -41,14 +43,14 @@ const RegistrationForm = ({ formType }) => {
             {error && <p className="text-red-500">{error}</p>}
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <div className="text-left">
-                    <label htmlFor="name" className="block text-white text-sm font-bold mb-1">
+                    <label htmlFor="username" className="block text-white text-sm font-bold mb-1">
                         Username
                     </label>
                     <input
                         type="text"
-                        name="name"
-                        id="name"
-                        value={formData.name}
+                        name="username"
+                        id="username"
+                        value={formData.username}
                         onChange={handleChange}
                         required
                         className="w-full p-3 rounded-md bg-gray-800 text-white focus:ring-2 focus:ring-yellow-400 border-none"

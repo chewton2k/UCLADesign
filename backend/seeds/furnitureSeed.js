@@ -13,7 +13,7 @@ const defaultFurniture = [
 async function seedDatabase(){
     try{
         await mongoose.connect(process.env.MONGO_URI);
-        console.log("Connected to MongoDB");
+        console.log("Connected to MongoDB furniture");
 
         await Furniture.deleteMany();
         await Furniture.insertMany(defaultFurniture);
