@@ -20,7 +20,7 @@ async function seedDatabase(){
         console.log("Furniture database seeded!");
         mongoose.connection.close();
     }catch(error){
-        console.error("Error seeding database:", error);
+        console.error("Error seeding database: with furniture", error);
     }
 };
 
