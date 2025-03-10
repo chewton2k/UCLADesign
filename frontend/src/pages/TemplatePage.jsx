@@ -9,9 +9,9 @@ const TemplatePage = () => {
             <HomePageTop /> 
             <main className="flex-grow"> 
                 <div className="relative inset-0 flex items-center justify-center z-20">
-                    <p className="font-bold text-s">
-                        Templates will go here.
-                    </p>
+                    <h1 className="font-bold text-4xl py-15">
+                        Review or Choose a Template!
+                    </h1>
                 </div>
                 {/* Template Grid will be displayed here */}
                 <TemplateGrid />

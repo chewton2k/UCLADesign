@@ -5,11 +5,13 @@ const HeartButton = () => {
 
     const toggleLike = () => {
         setLiked(!liked);
+        !liked ? alert("Saved!") : ""; 
     }
 
     return (
         <button onClick={toggleLike} className="mt-2 text-red-500">
             {liked ? '❤️' : '🤍'}
+            
         </button>
     );
 }

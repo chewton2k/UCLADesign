@@ -2,7 +2,7 @@ import React from 'react';
 
 const SubmitButton = () => {
     const handleSubmit = () => {
-        alert("Review Submitted!");
+        console.log("1"); 
     }
 
     return (
