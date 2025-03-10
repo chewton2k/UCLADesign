@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const RegistrationForm = ({ formType }) => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({ username: "", email: "", password: "" });
     const [error, setError] = useState(""); // State to handle errors
 
@@ -30,7 +32,7 @@ const RegistrationForm = ({ formType }) => {
             const data = await response.json();
             console.log("Registration successful:", data);
             setError(""); // Clear any previous errors
-            alert("Registration successful!"); // Notify the user
+            navigate("/templates"); 
         } catch (error) {
             console.error("Error during registration:", error);
             setError("An error occurred during registration."); // Set error message
