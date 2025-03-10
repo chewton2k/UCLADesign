@@ -9,7 +9,7 @@ const RegistrationForm = ({ formType }) => {
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent the default form submission behavior
 
