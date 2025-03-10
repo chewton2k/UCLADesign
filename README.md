@@ -14,7 +14,7 @@ The tool provides an interactive web app where users can visualize their room se
 This is a full-stack web application project built with a **React frontend** and a **Node.js/Express backend** using MongoDB as the database. This project also uses tools like **tailwindcss/vite** and **concurrently** to run the full project. 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
--[@tailwindcss/vite](https://tailwindcss.com/docs/installation/using-vite)
+- [@tailwindcss/vite](https://tailwindcss.com/docs/installation/using-vite)
 
 # Features
 
@@ -29,7 +29,7 @@ A search function will enable users to quickly find room designs that match thei
 5. Users Are Allowed to Create Their Own Items
 This feature empowers users to define custom items within the room design tool. Users can specify details like the dimensions and function of an item. These custom items can then be saved and integrated into their room designs for future use.
 6. Allow Users to Sign In
-Implementing a sign-in system will allow users to save their designs, preferences, and checklists across sessions. The sign-in feature will also enable additional collaborative features, such as allowing multiple users to edit a room together.
+Implementing a sign-in system will allow users to save their designs, preferences, and checklists across sessions. 
 7. Prices for Dorms
 Our project will include a database of UCLA dorm rooms with associated pricing information. Users can compare dorm options based on their budget and see how each layout aligns with their design preferences. 
 
@@ -68,26 +68,26 @@ Our project will include a database of UCLA dorm rooms with associated pricing i
    create an .env file in the root directory and copy over the following contents: 
 
    ```
-MONGO_URI=mongodb+srv://owenrfn:NW112ns@dormdesign.ud8dx.mongodb.net/genDorm?retryWrites=true&w=majority&appName=dormdesign
-PORT=5001
+   MONGO_URI=mongodb+srv://owenrfn:NW112ns@dormdesign.ud8dx.mongodb.net/genDorm?retryWrites=true&w=majority&appName=dormdesign
+   PORT=5001
    ```
 
 
 # Running the Project
 
 Frontend: 
-```bash
-npm run start:frontend 
-```
+   ```bash
+   npm run start:frontend 
+   ```
 
 Backend:
-```bash
-npm run start:backend
-```
+   ```bash
+   npm run start:backend
+   ```
 
 Run the whole project:
-```bash
-npm start
-```
+   ```bash
+   npm start
+   ```
 
 
