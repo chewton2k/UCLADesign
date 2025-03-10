@@ -1,5 +1,4 @@
-# UCLA Room Design Project
-by Tommy Yu, Owen Fan, Alex Tamanaha, Charlton Shih, Fiona Zhang.
+# UCLA Design
 
 ![Image](https://github.com/user-attachments/assets/4af81b32-51c6-4a72-88a4-3ea38cebf67f)
 
@@ -90,4 +89,6 @@ Run the whole project:
    npm start
    ```
 
+# Authors: 
 
+UCLADesign was made as a project for CS 35L taught by Professor Paul Eggert at UCLA in Winter 2025. Made by: Charlton Shih, Tommy Yu, Alex De La Cueva Tamanaha, Owen Fan, Fiona Zhang.
