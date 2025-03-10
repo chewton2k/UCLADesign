@@ -7,9 +7,10 @@ const LogInPage = () => {
     return (
         <div>
             <HomePageTop/> 
+            <main className = "flex-grow"> 
             <LogInForm/>
-            {/* Separator for the last section and footer*/}
-            <div className="py-54"></div>
+            <div className="py-45"></div>
+            </main>
             <HomePageBottom/>
         </div>
     );

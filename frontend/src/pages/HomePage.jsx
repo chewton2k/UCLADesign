@@ -7,7 +7,10 @@ const HomePage = () => {
   return (
     <div>
       <HomePageTop />
+      <main className = "flex-grow"> 
       <HomePageMiddle />
+      </main>
+      
       <HomePageBottom/> 
     </div>
   );

@@ -2,7 +2,8 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.0.8",
     "concurrently": "^9.1.2",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "react-transition-group": "^4.4.5"
   },
   "scripts": {
     "start:frontend": "npm run dev --prefix frontend",

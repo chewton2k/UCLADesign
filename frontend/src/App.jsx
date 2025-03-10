@@ -1,14 +1,15 @@
-//import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './App.css';
 import HomePage from './pages/HomePage.jsx';
 import RegistrationPage from './pages/RegistrationPage.jsx'
 import LogInPage from './pages/LogInPage.jsx'
 import TemplatePage from './pages/TemplatePage.jsx'
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 function App() {
     return (
         <Router>
+            <TransitionGroup>
             <Routes>
                 <Route path='/' element={<HomePage />} />
                 <Route path='/templates' element={<TemplatePage/>}> </Route>
@@ -16,10 +17,9 @@ function App() {
                 <Route path='/login' element={<LogInPage/>}> </Route>
                 <Route path='/signup' element={<RegistrationPage/>}> </Route>
             </Routes>
+            </TransitionGroup>
         </Router>
     );
 }
 
 export default App;
-
-//testing own git 
