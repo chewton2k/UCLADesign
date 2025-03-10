@@ -10,7 +10,7 @@ The tool provides an interactive web app where users can visualize their room se
 
 # Technologies Used
 
-This is a full-stack web application project built with a **React frontend** and a **Node.js/Express backend** using MongoDB as the database. This project also uses tools like **tailwindcss/vite** and **concurrently** to run the full project. 
+This is a full-stack web application project built with a **React frontend** and a **Node.js/Express backend** using **MongoDB** as the database. This project also uses tools/dependencies like **tailwindcss/vite** and **concurrently** to run the full project. 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 - [@tailwindcss/vite](https://tailwindcss.com/docs/installation/using-vite)
