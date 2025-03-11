@@ -36,8 +36,9 @@ const RegistrationForm = ({ formType }) => {
 
             const data = await response.json();
             console.log("Sign successful:", data);
-            setError(""); // Clear any previous errors
-            window.sessionStorage.setItem("UserLoggedIn", true); 
+            setError(""); 
+            window.sessionStorage.setItem("UserLoggedIn", "true"); 
+            window.sessionStorage.setItem("userName", formData.username); 
             navigate("/templates"); 
         } catch (error) {
             console.error("Error during Sign in:", error);
