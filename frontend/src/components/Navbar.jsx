@@ -46,7 +46,7 @@ const Navbar = () => {
               {username[0].toUpperCase()} {/* Profile initial */}
             </button>
            {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-white text-black shadow-md rounded-md">
+        <div className="absolute right-0 py-2 mt-2 w-48 bg-white text-black shadow-md rounded-md">
               <button onClick={handleLogout} className="block w-full text-left px-4 py-2 hover:bg-gray-200">Logout</button>
               </div>
               )}

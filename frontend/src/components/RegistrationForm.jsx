@@ -9,7 +9,7 @@ const RegistrationForm = ({ formType }) => {
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent the default form submission behavior
 
@@ -32,7 +32,9 @@ const RegistrationForm = ({ formType }) => {
             const data = await response.json();
             console.log("Registration successful:", data);
             setError(""); // Clear any previous errors
-            navigate("/templates"); 
+            window.sessionStorage.setItem("UserLoggedIn", "true"); 
+            window.sessionStorage.setItem("userName", formData.username); 
+            navigate("/create-design");     
         } catch (error) {
             console.error("Error during registration:", error);
             setError("An error occurred during registration."); // Set error message
