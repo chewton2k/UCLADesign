@@ -7,6 +7,7 @@ import TemplatePage from './pages/TemplatePage.jsx'
 //import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import ProtectedRoutes from './utils/ProtectedRoutes.jsx'
 import CreateDesignPage from "./pages/CreateDesignPage.jsx";
+import TodoListPage from "./pages/TodoListPage.jsx";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                 <Route path='/login' element={<LogInPage/>}> </Route>
                 <Route path='/signup' element={<RegistrationPage/>}> </Route>
                 <Route path='/create-design' element={<CreateDesignPage/>}> </Route>
+                <Route path='/todo-list' element={<TodoListPage/>}> </Route>
 
                 {/* <Route element={<ProtectedRoutes/>}> 
                 <Route path='/create-design' element={<CreateDesignPage/>}> </Route>
