@@ -41,39 +41,45 @@ const userLogin = async (req, res) => {
   try {
     const user = await User.findOne({ username });
 
-    if (user) {
-      if(user.lockTime && user.lockTime > Date.now()){
-        const remainingTime = Math.ceil((user.lockTime - Date.now()) / 1000); //divide by 1000 for unit conversion
-        res.status(403).json({ message: `Account Locked. Try again in ${remainingTime} seconds.`});
-      }
-      const isPasswordValid = await bcrypt.compare(password, user.password);
-
-      if (isPasswordValid) {
-        user.loginAttempts = 0; //reset counter
-        user.lockUntil = null;
-        await user.save();
-        res.json({
-          userId: user._id,
-          username: user.username,
-        });
-      } else {
-        user.loginAttempts = (user.loginAttempts || 0) + 1;
-        if(user.loginAttempts >= MAX_ATTEMPTS){
-          user.lockTime = new Date(Date.now() + LOCKTIME);
-          
-          res.status(403).json({ message: "Too many failed login attempts. Account locked for 10 minutes."});
-        }
-        await user.save();
-        res.status(401).json({ message: "Invalid username or password" });
-      }
-    } else {
-      res.status(401).json({ message: "Invalid username or password" });
+    if (!user) {
+      return res.status(401).json({ message: "Invalid username or password" });
     }
+
+    if (user.lockTime && user.lockTime > Date.now()) {
+      const remainingTime = Math.ceil((user.lockTime - Date.now()) / 1000); 
+      return res.status(403).json({ message: `Account Locked. Try again in ${remainingTime} seconds.`});
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (isPasswordValid) {
+      user.loginAttempts = 0; // Reset counter
+      user.lockUntil = null;
+      await user.save();
+      return res.json({
+        userId: user._id,
+        username: user.username,
+      });
+    }
+
+    // Handle invalid password case
+    user.loginAttempts = (user.loginAttempts || 0) + 1;
+
+    if (user.loginAttempts >= MAX_ATTEMPTS) {
+      user.lockTime = new Date(Date.now() + LOCKTIME);
+      await user.save();
+      return res.status(403).json({ message: "Too many failed login attempts. Account locked for 1 minutes." });
+    }
+
+    await user.save();
+    return res.status(401).json({ message: "Invalid username or password" });
+
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Login failed" });
+    return res.status(500).json({ error: "Login failed" });
   }
 };
+
 
 const getUsers = async (req, res) => {
   const users = await User.find();
