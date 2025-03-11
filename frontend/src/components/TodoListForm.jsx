@@ -27,8 +27,12 @@ function TodoListForm() {
     setTasks(updatedTasks);
   };
 
-  // task importance toggle
-
+  // importance toggle
+  const toggleImportance = (index) => {
+    const updatedTasks = [...tasks];
+    updatedTasks[index].isImportant = !updatedTasks[index].isImportant;
+    setTasks(updatedTasks);
+  };
   
 
   // delete task
@@ -63,7 +67,7 @@ function TodoListForm() {
         {tasks.map((task, index) => (
           <li
             key={index}
-            className={`flex items-center justify-between p-2 border-b ${task.isImportant ? 'bg-yellow-200' : ''}`}
+            className={`flex items-center justify-between p-2 border-b ${task.isImportant ? 'bg-yellow-100' : ''}`}
           >
             <div className="flex items-center gap-3">
               {/* completion toggle */}
@@ -88,6 +92,15 @@ function TodoListForm() {
 
             <div className="flex gap-2">
               {/* importance toggle */}
+              <button
+                onClick={() => toggleImportance(index)}
+                className={`px-2 py-1 rounded ${
+                  task.isImportant ? 'bg-yellow-300' : 'bg-gray-300'
+                }`}
+              >
+                {task.isImportant ? '!' : '!'} {/* unmark : important */}
+              </button>
+              
               <button
                 onClick={() => removeTask(index)}
                 className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
