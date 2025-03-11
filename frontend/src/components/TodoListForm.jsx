@@ -26,14 +26,14 @@ function TodoListForm() { ///update later
   // completion toggle
   const toggleTaskCompletion = (category, index) => {
     const updatedTasks = {...tasks};
-    updatedTasks[index].isCompleted = !updatedTasks[category][index].isCompleted;
+    updatedTasks[category][index].isCompleted = !updatedTasks[category][index].isCompleted;
     setTasks(updatedTasks);
   };
 
   // importance toggle
   const toggleImportance = (category, index) => {
     const updatedTasks = {...tasks};
-    updatedTasks[index].isImportant = !updatedTasks[category][index].isImportant;
+    updatedTasks[category][index].isImportant = !updatedTasks[category][index].isImportant;
     setTasks(updatedTasks);
   };
   
