@@ -5,6 +5,7 @@ import RegistrationPage from './pages/RegistrationPage.jsx'
 import LogInPage from './pages/LogInPage.jsx'
 import TemplatePage from './pages/TemplatePage.jsx'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import TodoListPage from './pages/TodoListPage.jsx'; ///
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                 <Route path='/create-design' element={<HomePage/>}> </Route>
                 <Route path='/login' element={<LogInPage/>}> </Route>
                 <Route path='/signup' element={<RegistrationPage/>}> </Route>
+                <Route path='/todo-list' element={<TodoListPage/>}> </Route>
             </Routes>
             </TransitionGroup>
         </Router>
