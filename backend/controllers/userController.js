@@ -2,7 +2,7 @@ const User = require("../models/User");
 const date = new Date();
 const bcrypt = require("bcrypt");
 const MAX_ATTEMPTS = 3;
-const LOCKTIME = 600*1000;
+const LOCKTIME = 60*1000;
 
 const registerUser = async (req, res) => {
   const { username, email, password } = req.body;
