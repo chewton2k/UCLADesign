@@ -21,7 +21,11 @@ function TodoListForm() {
   };
 
   // completion toggle
-  
+  const toggleTaskCompletion = (index) => {
+    const updatedTasks = [...tasks];
+    updatedTasks[index].isCompleted = !updatedTasks[index].isCompleted;
+    setTasks(updatedTasks);
+  };
 
   // task importance toggle
 
@@ -62,12 +66,28 @@ function TodoListForm() {
             className={`flex items-center justify-between p-2 border-b ${task.isImportant ? 'bg-yellow-200' : ''}`}
           >
             <div className="flex items-center gap-3">
-              <span>
+              {/* completion toggle */}
+              <button
+                onClick={() => toggleTaskCompletion(index)}
+                className={`w-6 h-6 border-2 rounded-full 
+                  ${task.isCompleted ? 'bg-gray-500' : 'bg-transparent'} 
+                  ${task.isCompleted ? 'border-gray-500' : 'border-gray-500'} 
+                  hover:bg-gray-300`} /// grey hover
+              ></button>
+
+              <span
+                onClick={() => toggleTaskCompletion(index)}
+                style={{
+                  textDecoration: task.isCompleted ? 'line-through' : 'none',
+                  cursor: 'pointer',
+                }}
+              >
                 {task.text}
               </span>
             </div>
 
             <div className="flex gap-2">
+              {/* importance toggle */}
               <button
                 onClick={() => removeTask(index)}
                 className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
