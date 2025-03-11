@@ -2,7 +2,9 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.0.8",
     "concurrently": "^9.1.2",
+    "connect-mongo": "^5.1.0",
     "express": "^4.21.2",
+    "express-session": "^1.18.1",
     "react-transition-group": "^4.4.5"
   },
   "scripts": {

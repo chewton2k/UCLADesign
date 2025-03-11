@@ -56,6 +56,7 @@ const userLogin = async (req, res) => {
       user.loginAttempts = 0; // Reset counter
       user.lockUntil = null;
       await user.save();
+
       return res.json({
         userId: user._id,
         username: user.username,
