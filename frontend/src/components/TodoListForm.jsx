@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 
-function TodoListForm() { ///update later
+function TodoListForm() { 
   const [tasks, setTasks] = useState({
     Bedroom: [],
+    'School Supplies': [],
     Bathroom: [],
     Kitchen: [],
     Clothing: [],
-    'School Supplies': [],
-    Documents: [],
-    Others: [],
+    'Documents/Other': [],
   });
   
   const [newTask, setNewTask] = useState('');
@@ -18,7 +17,13 @@ function TodoListForm() { ///update later
   // add task 
   const addTask = () => {
     if (newTask.trim()) {
-      setTasks([...tasks, { text: newTask, isCompleted: false, isImportant: false }]);
+      setTasks((prevTasks) => ({
+        ...prevTasks,
+        [selectedCategory]: [
+          ...prevTasks[selectedCategory],
+          { text: newTask, isCompleted: false, isImportant: false }
+        ]
+      }));
       setNewTask('');
     }
   };
@@ -47,7 +52,7 @@ function TodoListForm() { ///update later
   };
 
   return (
-    <div className="p-4 max-w-md mx-auto border border-gray-300 rounded-lg shadow-lg">
+    <div className="p-4 max-w-6xl mx-auto border border-gray-300 rounded-lg shadow-lg">
       <h1 className="text-2xl font-bold mb-4">To-Do List</h1>
 
       {/* category selector */} 
@@ -84,59 +89,61 @@ function TodoListForm() { ///update later
       </div>
 
       {/* task list by category */} 
-      {Object.entries(tasks).map(([category, categoryTasks]) => (
-        <div key={category} className="mb-6">
-          <h2 className="text-xl font-semibold">{category}</h2>
-          <ul>
-            {categoryTasks.map((task, index) => (
-              <li
-                key={index}
-                className={`flex items-center justify-between p-2 border-b ${task.isImportant ? 'bg-yellow-100' : ''}`}
-              >
-                <div className="flex items-center gap-3">
-                  {/* completion toggle */}
-                  <button
-                    onClick={() => toggleTaskCompletion(category, index)}
-                    className={`w-6 h-6 border-2 rounded-full 
-                      ${task.isCompleted ? 'bg-gray-500' : 'bg-transparent'} 
-                      ${task.isCompleted ? 'border-gray-500' : 'border-gray-500'} 
-                      hover:bg-gray-300`} /// grey hover
-                  ></button>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {Object.entries(tasks).map(([category, categoryTasks]) => (
+          <div key={category} className="mb-6">
+            <h2 className="text-xl font-semibold">{category}</h2>
+            <ul>
+              {categoryTasks.map((task, index) => (
+                <li
+                  key={index}
+                  className={`flex items-center justify-between p-2 border-b ${task.isImportant ? 'bg-yellow-100' : ''}`}
+                >
+                  <div className="flex items-center gap-3">
+                    {/* completion toggle */}
+                    <button
+                      onClick={() => toggleTaskCompletion(category, index)}
+                      className={`w-6 h-6 border-2 rounded-full 
+                        ${task.isCompleted ? 'bg-gray-500' : 'bg-transparent'} 
+                        ${task.isCompleted ? 'border-gray-500' : 'border-gray-500'} 
+                        hover:bg-gray-300`} /// grey hover
+                    ></button>
 
-                  <span
-                    onClick={() => toggleTaskCompletion(category, index)}
-                    style={{
-                      textDecoration: task.isCompleted ? 'line-through' : 'none',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    {task.text}
-                  </span>
-                </div>
+                    <span
+                      onClick={() => toggleTaskCompletion(category, index)}
+                      style={{
+                        textDecoration: task.isCompleted ? 'line-through' : 'none',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      {task.text}
+                    </span>
+                  </div>
 
-                <div className="flex gap-2">
-                  {/* importance toggle */}
-                  <button
-                    onClick={() => toggleImportance(category, index)}
-                    className={`px-2 py-1 rounded ${
-                      task.isImportant ? 'bg-yellow-300' : 'bg-gray-300'
-                    }`}
-                  >
-                    {task.isImportant ? '!' : '!'} {/* unmark : important */}
-                  </button>
-                  
-                  <button
-                    onClick={() => removeTask(category, index)}
-                    className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+                  <div className="flex gap-2">
+                    {/* importance toggle */}
+                    <button
+                      onClick={() => toggleImportance(category, index)}
+                      className={`px-2 py-1 rounded ${
+                        task.isImportant ? 'bg-yellow-300' : 'bg-gray-300'
+                      }`}
+                    >
+                      {task.isImportant ? '!' : '!'} {/* unmark : important */}
+                    </button>
+                    
+                    <button
+                      onClick={() => removeTask(category, index)}
+                      className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
