@@ -2,12 +2,44 @@ import React, { useState } from 'react';
 
 function TodoListForm() { 
   const [tasks, setTasks] = useState({
-    Bedroom: [],
-    'School Supplies': [],
-    Bathroom: [],
-    Kitchen: [],
-    Clothing: [],
-    'Documents/Other': [],
+    Bedroom: [
+      { text: "Bed sheets", isCompleted: false, isImportant: true },
+      { text: "Pillow", isCompleted: false, isImportant: true },
+      { text: "Blanket", isCompleted: false, isImportant: true },
+      { text: "Headboard", isCompleted: false, isImportant: false },
+    ],
+    'School Supplies': [
+      { text: "Notebooks", isCompleted: false, isImportant: true },
+      { text: "Pencil case", isCompleted: false, isImportant: true },
+      { text: "Laptop", isCompleted: false, isImportant: true },
+      { text: "Sticky notes", isCompleted: false, isImportant: false },
+    ],
+    Bathroom: [
+      { text: "Shampoo and conditioner", isCompleted: false, isImportant: true },
+      { text: "Hand soap", isCompleted: false, isImportant: true },
+      { text: "Soap", isCompleted: false, isImportant: true },
+      { text: "Toothbrush and toothpaste", isCompleted: false, isImportant: true },
+      { text: "Skincare", isCompleted: false, isImportant: true },
+      { text: "Cup", isCompleted: false, isImportant: false },
+    ],
+    Kitchen: [
+      { text: "Bowls", isCompleted: false, isImportant: true },
+      { text: "Utensils", isCompleted: false, isImportant: true },
+      { text: "Baking powder", isCompleted: false, isImportant: false },
+    ],
+    Clothing: [
+      { text: "Jackets", isCompleted: false, isImportant: true },
+      { text: "Sweaters", isCompleted: false, isImportant: true },
+      { text: "Jeans", isCompleted: false, isImportant: true },
+      { text: "Socks", isCompleted: false, isImportant: true },
+      { text: "Sunnies", isCompleted: false, isImportant: false },
+    ],
+    'Documents/Other': [
+      { text: "Student ID", isCompleted: false, isImportant: true },
+      { text: "ID", isCompleted: false, isImportant: true },
+      { text: "Bus pass", isCompleted: false, isImportant: true },
+      { text: "Passport", isCompleted: false, isImportant: false },
+    ],
   });
   
   const [newTask, setNewTask] = useState('');
