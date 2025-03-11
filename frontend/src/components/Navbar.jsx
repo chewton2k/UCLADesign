@@ -25,7 +25,7 @@ const Navbar = () => {
       <div className="flex items-center space-x-4">
         <Link to="/" className="text-xl font-medium hover:opacity-70">
           <img 
-            src="/ucla-logo.jpg" 
+            src="/logo-cutout.png" 
             alt="UCLA Logo" 
             className="w-16 h-auto rounded-lg shadow-lg"
           />

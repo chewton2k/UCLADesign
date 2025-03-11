@@ -5,8 +5,11 @@ const ProtectedRoutes = () => {
     let user = null; 
     if (isLoggedIn === "true") { 
         user = true; 
-    } else { 
+    } else if (isLoggedIn === "false"){ 
         user = false;
+    }
+    else {
+        user = null; 
     }
     return user ? <Outlet /> : <Navigate to="/signup" />
 };

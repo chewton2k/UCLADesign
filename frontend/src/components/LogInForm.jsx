@@ -39,7 +39,7 @@ const RegistrationForm = ({ formType }) => {
             setError(""); 
             window.sessionStorage.setItem("UserLoggedIn", "true"); 
             window.sessionStorage.setItem("userName", formData.username); 
-            navigate("/templates"); 
+            navigate("/create-design"); 
         } catch (error) {
             console.error("Error during Sign in:", error);
             setError("An error occurred during Sign in."); // Set error message

@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   return (
-    <div className="relative flex flex-col lg:flex-row items-center justify-between px-12 py-16 min-h-screen">
+    <div className="relative flex flex-col lg:flex-row items-center justify-between px-12 py-47">
       {/* Text Content on the Top for Small Screens / Left for Large */}
-      <div className="text-center lg:text-left z-20 px-45">
+      <div className="text-center lg:text-left z-20 px-45 py-20">
         <h1 className="text-4xl md:text-5xl font-semibold text-black">
           Welcome to UCLA Design
         </h1>
@@ -22,10 +22,10 @@ const HeroSection = () => {
             Get Started
           </Link>
           <Link
-            to="/templates"
+            to="/create-design"
             className="px-4 py-2 bg-gray-800 rounded-lg text-lg font-light text-white hover:bg-gray-700"
           >
-            Browse Designs
+            Make a Design
           </Link>
         </div>
       </div>
