@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 
 function TodoListForm() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState([
+    { text: "Shampoo and Conditioner", isCompleted: false, isImportant: true},
+    { text: "Soap", isCompleted: false, isImportant: true },
+    { text: "Towel", isCompleted: false, isImportant: true },
+    { text: "Shower Sliders", isCompleted: false, isImportant: true },
+    { text: "Bathroom Toiletries", isCompleted: false, isImportant: true },
+    { text: "Clothes", isCompleted: false, isImportant: true },
+    { text: "Bed Sheets", isCompleted: false, isImportant: true },
+  ]);
   const [newTask, setNewTask] = useState('');
 
   // add task
@@ -16,6 +24,7 @@ function TodoListForm() {
   
 
   // task importance toggle
+
   
 
   // delete task
