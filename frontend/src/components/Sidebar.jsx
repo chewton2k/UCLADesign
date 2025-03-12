@@ -108,30 +108,33 @@ const Sidebar = ({ onToolSelect }) => {
 
 {showRoomListPopup && (
   <div ref={roomPopupRef} className="absolute top-20 left-64 bg-white border p-4 rounded shadow-md z-10">
-    <div className="grid grid-cols-1 gap-4">
-      {roomOptions.map((room) => (
-        <div
-          key={room.type}
-          className="p-4 border rounded-lg cursor-pointer hover:bg-gray-50"
-          draggable
-          onDragStart={(e) => {
-            e.dataTransfer.setData("text/plain", room.image);
-            onToolSelect(room); 
-          }}
-        >
-          <img 
-            src={room.image} 
-            alt={room.label}
-            className="w-full h-32 object-cover mb-2 rounded"
-          />
-          <div className="font-semibold">{room.label}</div>
-          <div className="text-sm text-gray-600">{room.dimensions}</div>
-          <div className="text-sm font-medium text-green-600">{room.price}</div>
-        </div>
-      ))}
+    <div className="grid grid-cols-1 gap-4 max-h-200 overflow-y-auto">
+      <li>
+        {roomOptions.map((room) => (
+          <div
+            key={room.type}
+            className="p-4 border rounded-lg cursor-pointer hover:bg-gray-50"
+            draggable
+            onDragStart={(e) => {
+              e.dataTransfer.setData("text/plain", room.image);
+              onToolSelect(room); 
+            }}
+          >
+            <img 
+              src={room.image} 
+              alt={room.label}
+              className="w-full h-32 object-cover mb-2 rounded"
+            />
+            <div className="font-semibold">{room.label}</div>
+            <div className="text-sm text-gray-600">{room.dimensions}</div>
+            <div className="text-sm font-medium text-green-600">{room.price}</div>
+          </div>
+        ))}
+      </li>
     </div>
   </div>
 )}
+
 
 {showObjectsPopup && (
         <div ref={objectsPopupRef} className="absolute top-20 left-64 bg-white border p-4 rounded shadow-md z-10">
