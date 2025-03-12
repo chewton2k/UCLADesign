@@ -81,6 +81,10 @@ const Sidebar = ({ onToolSelect }) => {
               <div
                 key={obj.type}
                 className={`p-3 rounded cursor-pointer ${obj.color}`}
+                draggable
+                onDragStart={(e) => {
+                  e.dataTransfer.setData("text/plain", obj.type) //sends string identifier to RoomDesigner
+;                }}
                 onClick={() => {
                   onToolSelect(obj.type);
                   setShowObjectsPopup(false);
