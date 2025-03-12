@@ -2,10 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
-const session = require("express-session");
-const MongoStore = require("connect-mongo");
 const userRoutes = require("./routes/userRoutes");
 const furnitureRoutes = require("./routes/furnitureRoutes");
+const dormRoutes = require("./routes/dormRoutes"); 
 
 dotenv.config();
 
@@ -27,6 +26,7 @@ mongoose
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/furniture", furnitureRoutes);
+app.use("/api/dorms", dormRoutes)
 
 // Root route
 app.get("/", (req, res) => {

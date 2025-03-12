@@ -1,0 +1,36 @@
+const Room = require('../models/Dorm'); 
+
+
+const createRoom = async (req, res) => {
+    const { roomType, roomDimensions, price, image } = req.body;
+
+    if (!roomType || !roomDimensions || !price || !image) {
+        return res.status(400).json({ message: 'All fields are required' });
+    }
+
+    try {
+        const newDorm = new Room({ roomType, roomDimensions, price, image });
+        const savedDorm = await newDorm.save();
+        res.status(201).json(savedDorm);
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to create dorm', error: error.message });
+    }
+};
+
+
+const getRoomById = async (req, res) => {
+    try {
+        const dorm = await Room.findById(req.params.id);
+        if (!dorm) return res.status(404).json({ message: 'Dorm not found' });
+
+        res.status(200).json(dorm);
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to fetch dorm', error: error.message });
+    }
+};
+
+
+module.exports = {
+    createRoom,
+    getRoomById
+};

@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
     password: {type: String, required: true},
     loginAttempts: { type: Number},
     lockTime:{type: Date},
+    //rooms: {type: Array} //rooms to tie to a user 
 },
 { timestamps: true });
 
