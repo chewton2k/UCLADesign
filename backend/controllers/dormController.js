@@ -29,8 +29,24 @@ const getRoomById = async (req, res) => {
     }
 };
 
+const getAllRooms = async (req, res) => {
+    try {
+        const rooms = await Room.find();
+        if (!rooms || rooms.length === 0) {
+            return res.status(404).json({ message: 'No dorms found' });
+        }
+
+        res.status(200).json(rooms);
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to fetch dorms', error: error.message });
+    }
+};
+
+
+
 
 module.exports = {
     createRoom,
-    getRoomById
+    getRoomById, 
+    getAllRooms
 };

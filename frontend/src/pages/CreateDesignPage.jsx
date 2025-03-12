@@ -15,7 +15,6 @@ const CreateDesignPage = () => {
                             <RoomDesigner />
                         </div>
                     </div>
-                    <div className="py-50"></div>
                 </main>
                 <HomePageBottom />
             </div>

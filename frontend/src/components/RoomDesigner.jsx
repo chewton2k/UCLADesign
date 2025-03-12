@@ -9,7 +9,7 @@ export default function RoomDesigner() {
 
     const handleDrop = (e) => {
         e.preventDefault();
-        const identifier = e.dataTransfer.getData("text/plain");
+        const imagePath = e.dataTransfer.getData("text/plain"); // Get the image path
         const offsetX = e.clientX - containerRef.current.getBoundingClientRect().left;
         const offsetY = e.clientY - containerRef.current.getBoundingClientRect().top;
 
@@ -32,11 +32,10 @@ export default function RoomDesigner() {
             ));
             setDraggedObjectId(null);
         } else {
-            //else add a new object
+            // Add a new object
             const newObject = {
                 id: Date.now(),
-                src: `/images/${identifier}.png`,
-                identifier,
+                src: imagePath, // Use the image path from dataTransfer
                 x: offsetX,
                 y: offsetY
             };
@@ -144,8 +143,8 @@ export default function RoomDesigner() {
                     <img
                         key={obj.id}
                         src={obj.src}
-                        alt={obj.identifier}
-                        className="absolute w-16 h-16 cursor-pointer"
+                        alt="room"
+                        className="absolute w-32 h-32 cursor-pointer" // Adjust size as needed
                         style={{ left: obj.x, top: obj.y }}
                         draggable
                         onDragStart={(e) => handleObjectDragStart(e, obj.id)}
@@ -162,5 +161,5 @@ export default function RoomDesigner() {
                 }
             `}</style>
         </div>
-    )
+    );
 }

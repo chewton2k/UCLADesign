@@ -7,16 +7,7 @@ const roomSchema = new mongoose.Schema({
         width: { type: Number, required: true } 
     },
     price: { type: String, required: true }, 
-    image: { type: String, required: true },
-
-    layout: [
-        {
-            identifier: {type: String, required: true},
-            x: {type: Number, required: true},
-            y: {type: Number, required: true},
-            src: {type: String, required: true},
-        },
-    ]
-}, { timestamps: true });
+    image: { type: String, required: true }
+});
 
 module.exports = mongoose.model("Room", roomSchema);
