@@ -9,20 +9,15 @@ export default function RoomDesigner() {
         e.preventDefault();
         const imagePath = e.dataTransfer.getData("text/plain");
         const containerRect = containerRef.current.getBoundingClientRect();
-
+    
+        // Calculate relative position within container
         let offsetX = e.clientX - containerRect.left;
         let offsetY = e.clientY - containerRect.top;
-
-        const imageWidth = 128; 
-        const imageHeight = 128;
-
-        offsetX = Math.max(imageWidth*2, Math.min(offsetX, containerRect.width - imageWidth*2));
-        offsetY = Math.max(imageHeight*2, Math.min(offsetY, containerRect.height - imageHeight*2));
-
+    
         if (draggedObjectId) {
             setObjects(prev => prev.map(obj => 
-                obj.id === draggedObjectId
-                    ? { ...obj, x: offsetX, y: offsetY }
+                obj.id === draggedObjectId 
+                    ? { ...obj, x: offsetX, y: offsetY } 
                     : obj
             ));
             setDraggedObjectId(null);
@@ -144,18 +139,20 @@ export default function RoomDesigner() {
             >
                 {objects.map((obj) => (
                     <img
-                        key={obj.id}
-                        src={obj.src}
-                        alt="room"
-                        className="absolute w-128 h-128 cursor-pointer"
-                        style={{ 
-                            left: obj.x, 
-                            top: obj.y,
-                            transform: 'translate(-50%, -50%)' // This centers the image
-                        }}
-                        draggable
-                        onDragStart={(e) => handleObjectDragStart(e, obj.id)}
-                    />
+                    key={obj.id}
+                    src={obj.src}
+                    alt="room"
+                    className="absolute cursor-pointer"
+                    style={{
+                        left: obj.x,
+                        top: obj.y,
+                        transform: 'translate(-50%, -50%)',
+                        maxWidth: '100%',
+                        maxHeight: '100%'
+                    }}
+                    draggable
+                    onDragStart={(e) => handleObjectDragStart(e, obj.id)}
+                />
                 ))}
             </div>
 
