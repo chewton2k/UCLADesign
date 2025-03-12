@@ -9,36 +9,33 @@ export default function RoomDesigner() {
         e.preventDefault();
         const imagePath = e.dataTransfer.getData("text/plain");
         const containerRect = containerRef.current.getBoundingClientRect();
-        //console.log(imagePath); 
-        // Calculate relative position within container
+    
         let offsetX = e.clientX - containerRect.left;
         let offsetY = e.clientY - containerRect.top;
     
+        const isRoom = ["/plaza_v1.jpg", "/plaza_v2.jpg", "/deluxe.jpg", "/classic.jpg"].includes(imagePath);
+        const roomExists = objects.some(obj => 
+            ["/plaza_v1.jpg", "/plaza_v2.jpg", "/deluxe.jpg", "/classic.jpg"].includes(obj.src)
+        );
+    
         if (draggedObjectId) {
-            setObjects(prev => prev.map(obj => 
-                obj.id === draggedObjectId 
-                    ? { ...obj, x: offsetX, y: offsetY } 
+            setObjects(prev => prev.map(obj =>
+                obj.id === draggedObjectId
+                    ? { ...obj, x: offsetX, y: offsetY }
                     : obj
             ));
             setDraggedObjectId(null);
         } else {
-            const newObject = {
-                id: Date.now(),
-                src: imagePath,
-                x: offsetX,
-                y: offsetY
-            };
-
-            if (
-                newObject.src === "/plaza_v1.jpg" || 
-                newObject.src === "/plaza_v2.jpg" || 
-                newObject.src === "/deluxe.jpg" ||
-                newObject.src === "/classic.jpg"
-            ) { 
+            if (isRoom || roomExists) {
+                const newObject = {
+                    id: Date.now(),
+                    src: imagePath,
+                    x: offsetX,
+                    y: offsetY
+                };
                 setObjects(prev => [...prev, newObject]);
-            } else { 
-                alert("please choose a room first");
-                return;  
+            } else {
+                alert("Please place a room first before adding objects.");
             }
         }
     };
