@@ -113,7 +113,7 @@ const Sidebar = ({ onToolSelect }) => {
         {roomOptions.map((room) => (
           <div
             key={room.type}
-            className="p-4 border rounded-lg cursor-pointer hover:bg-gray-50"
+            className="p-4 border rounded-lg cursor-pointer hover:bg-gray-300"
             draggable
             onDragStart={(e) => {
               e.dataTransfer.setData("text/plain", room.image);
