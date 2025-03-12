@@ -1,7 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
+    const [loggedout, setLoggedout] = useState(
+      window.sessionStorage.getItem("UserLoggedIn") === "true"
+    );
+
   return (
     <div className="relative flex flex-col lg:flex-row items-center justify-between px-12 py-47">
       {/* Text Content on the Top for Small Screens / Left for Large */}
@@ -14,20 +18,31 @@ const HeroSection = () => {
         </p>
 
         {/* Call to Action Buttons */}
+        {!loggedout ? (
         <div className="mt-6 flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+        <Link
+          to="/signup"
+          className="px-4 py-2 bg-blue-600 rounded-lg text-lg font-light text-white hover:bg-blue-500"
+        >
+          Get Started
+        </Link>
+        <Link
+          to="/create-design"
+          className="px-4 py-2 bg-gray-800 rounded-lg text-lg font-light text-white hover:bg-gray-700"
+        >
+          Make a Design
+        </Link>
+      </div>
+        ) : (
+          <div className="mt-6 flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
           <Link
-            to="/signup"
-            className="px-4 py-2 bg-blue-600 rounded-lg text-lg font-light text-white hover:bg-blue-500"
-          >
-            Get Started
-          </Link>
-          <Link
-            to="/create-design"
-            className="px-4 py-2 bg-gray-800 rounded-lg text-lg font-light text-white hover:bg-gray-700"
-          >
-            Make a Design
-          </Link>
-        </div>
+          to="/create-design"
+          className="px-4 py-2 bg-gray-800 rounded-lg text-lg font-light text-white hover:bg-gray-700"
+        >
+          Make a Design
+        </Link>
+      </div>
+        )}
       </div>
 
       {/* Image Section (Moves to Bottom when Screen Shrinks) */}
