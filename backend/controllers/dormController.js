@@ -9,7 +9,7 @@ const createRoom = async (req, res) => {
     }
 
     try {
-        const newDorm = new Room({ roomType, roomDimensions, price, image });
+        const newDorm = new Room({ roomType, roomDimensions, price, image, layout: layour || [] });
         const savedDorm = await newDorm.save();
         res.status(201).json(savedDorm);
     } catch (error) {
