@@ -7,23 +7,29 @@ export default function RoomDesigner() {
 
     const handleDrop = (e) => {
         e.preventDefault();
-        const imagePath = e.dataTransfer.getData("text/plain"); // Get the image path
-        const offsetX = e.clientX - containerRef.current.getBoundingClientRect().left;
-        const offsetY = e.clientY - containerRef.current.getBoundingClientRect().top;
+        const imagePath = e.dataTransfer.getData("text/plain");
+        const containerRect = containerRef.current.getBoundingClientRect();
 
-        // Check if we're moving an existing object
+        let offsetX = e.clientX - containerRect.left;
+        let offsetY = e.clientY - containerRect.top;
+
+        const imageWidth = 128; 
+        const imageHeight = 128;
+
+        offsetX = Math.max(imageWidth*2, Math.min(offsetX, containerRect.width - imageWidth*2));
+        offsetY = Math.max(imageHeight*2, Math.min(offsetY, containerRect.height - imageHeight*2));
+
         if (draggedObjectId) {
-            setObjects(prev => prev.map(obj =>
+            setObjects(prev => prev.map(obj => 
                 obj.id === draggedObjectId
                     ? { ...obj, x: offsetX, y: offsetY }
                     : obj
             ));
             setDraggedObjectId(null);
         } else {
-            // Add a new object
             const newObject = {
                 id: Date.now(),
-                src: imagePath, // Use the image path from dataTransfer
+                src: imagePath,
                 x: offsetX,
                 y: offsetY
             };
@@ -37,7 +43,7 @@ export default function RoomDesigner() {
 
     const handleObjectDragStart = (e, id) => {
         setDraggedObjectId(id);
-        e.dataTransfer.setData("text/plain", "move"); //set as random data 
+        e.dataTransfer.setData("text/plain", "move");
     };
 
     const handleSave = async () => {
@@ -97,7 +103,7 @@ export default function RoomDesigner() {
         }
     };
 
-    const gridSize = 20;
+    const gridSize = 15;
 
     return (
         <div className="p-4">
@@ -132,8 +138,12 @@ export default function RoomDesigner() {
                         key={obj.id}
                         src={obj.src}
                         alt="room"
-                        className="absolute w-128 h-128 cursor-pointer" // Adjust size as needed
-                        style={{ left: obj.x, top: obj.y }}
+                        className="absolute w-128 h-128 cursor-pointer"
+                        style={{ 
+                            left: obj.x, 
+                            top: obj.y,
+                            transform: 'translate(-50%, -50%)' // This centers the image
+                        }}
                         draggable
                         onDragStart={(e) => handleObjectDragStart(e, obj.id)}
                     />
