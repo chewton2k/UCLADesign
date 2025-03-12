@@ -82,6 +82,11 @@ const Sidebar = ({ onToolSelect }) => {
       }
     }; 
 
+    //user generated items 
+    const handleNewFurniture = async () => { 
+
+    }; 
+
   useEffect(() => {
     handleRooms(); 
     handleFurniture(); 

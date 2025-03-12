@@ -9,7 +9,7 @@ export default function RoomDesigner() {
         e.preventDefault();
         const imagePath = e.dataTransfer.getData("text/plain");
         const containerRect = containerRef.current.getBoundingClientRect();
-    
+        //console.log(imagePath); 
         // Calculate relative position within container
         let offsetX = e.clientX - containerRect.left;
         let offsetY = e.clientY - containerRect.top;
@@ -28,7 +28,18 @@ export default function RoomDesigner() {
                 x: offsetX,
                 y: offsetY
             };
-            setObjects(prev => [...prev, newObject]);
+
+            if (
+                newObject.src === "/plaza_v1.jpg" || 
+                newObject.src === "/plaza_v2.jpg" || 
+                newObject.src === "/deluxe.jpg" ||
+                newObject.src === "/classic.jpg"
+            ) { 
+                setObjects(prev => [...prev, newObject]);
+            } else { 
+                alert("please choose a room first");
+                return;  
+            }
         }
     };
 
