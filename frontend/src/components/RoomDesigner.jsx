@@ -132,7 +132,7 @@ export default function RoomDesigner() {
                         key={obj.id}
                         src={obj.src}
                         alt="room"
-                        className="absolute w-32 h-32 cursor-pointer" // Adjust size as needed
+                        className="absolute w-128 h-128 cursor-pointer" // Adjust size as needed
                         style={{ left: obj.x, top: obj.y }}
                         draggable
                         onDragStart={(e) => handleObjectDragStart(e, obj.id)}
