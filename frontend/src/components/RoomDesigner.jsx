@@ -97,6 +97,19 @@ export default function RoomDesigner() {
         }
     };
 
+    const handleClearAll = () => {
+        setObjects([]);
+    };
+
+    const handleClearRoom = () =>{
+        if(objects.length > 0){
+            const keep = objects[0];
+            setObjects([first]);
+        }else{
+            alert("No room to be preserved.");
+        }
+    };
+
     const gridSize = 20;
 
     return (
@@ -108,6 +121,18 @@ export default function RoomDesigner() {
                 className="mb-4 px-4 bg-blue-600 text-white rounded hover:bg-blue-700"
             >
                 Save Room
+            </button>
+            <button
+                onClick={handleClearAll}
+                className="mb-4 px-4 bg-red-600 text-white rounded hover:bg-red-700"
+            >
+                Clear All
+            </button>
+            <button
+                onClick={handleClearRoom}
+                className="mb-4 px-4 bg-red-600 text-white rounded hover:bg-red-700"
+            >
+                Clear Room
             </button>
             <div
                 ref={containerRef}
