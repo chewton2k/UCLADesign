@@ -62,7 +62,7 @@ export default function RoomDesigner() {
                 layout: objects,
             };
 
-            const response = await fetch("http://localhost:5001/api/rooms", {
+            const response = await fetch("http://localhost:5001/api/dorms/create-room", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
