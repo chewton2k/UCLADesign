@@ -29,6 +29,22 @@ const getRoomById = async (req, res) => {
     }
 };
 
+const getRoomByImage = async(req, res) => {
+    try{
+        const rawImage = req.params.imagePath;
+        const processedImage = `/${rawImage}`;
+        const room = await Room.findOne({image: processedImage});
+
+        if(!room){
+            return res.status(404).json({ message: "Room type not found in database"});
+        }
+
+        res.status(200).json(room);
+    }catch(error){
+        res.status(500).json({message: "Failed to fetch room by type", error: error.message});
+    }
+};
+
 const getAllRooms = async (req, res) => {
     try {
         const rooms = await Room.find();
@@ -48,5 +64,6 @@ const getAllRooms = async (req, res) => {
 module.exports = {
     createRoom,
     getRoomById, 
+    getRoomByImage,
     getAllRooms
 };

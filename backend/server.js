@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const userRoutes = require("./routes/userRoutes");
 const furnitureRoutes = require("./routes/furnitureRoutes");
 const dormRoutes = require("./routes/dormRoutes"); 
+const designRoutes = require("./routes/designRoutes");
 
 dotenv.config();
 
@@ -26,7 +27,8 @@ mongoose
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/furniture", furnitureRoutes);
-app.use("/api/dorms", dormRoutes)
+app.use("/api/dorms", dormRoutes);
+app.use("/api/designs", designRoutes);
 
 // Root route
 app.get("/", (req, res) => {

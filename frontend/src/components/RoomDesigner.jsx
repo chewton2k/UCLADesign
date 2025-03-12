@@ -52,29 +52,38 @@ export default function RoomDesigner() {
             return;
         }
 
-        const roomIdentifier = objects[0].identifier;
+        const roomIdentifier = objects[0].src.slice(1);
+        const userName = window.sessionStorage.getItem("userName");
+
+
+
+        if(!userName){
+            alert("User not logged in. No account to associate design with.");
+            return;
+        }
         try{
-            const roomResponse = await fetch(`http://localhost:5001/api/rooms/by-identifier/${roomIdentifier}`);
-            if(!roomResponse.ok){
-                throw new Error("Room type not found in database.");
+
+            const roomResponse = await fetch(`http://localhost:5001/api/dorms/image/${roomIdentifier}`);
+            if (!roomResponse.ok) {
+            throw new Error("Room type not found in database.");
             }
 
             const roomInfo = await roomResponse.json();
+            
             const roomData = {
-                roomType: roomInfo.roomType,
-                roomDimensions: roomInfo.roomDimensions,
-                price: roomInfo.price,
-                image: roomInfo.image,
+                userName,
                 layout: objects,
             };
 
-            const response = await fetch("http://localhost:5001/api/dorms/create-room", {
+            const response = await fetch("http://localhost:5001/api/designs/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(roomData),
             });
+
+            console.log("Sending design daata", roomData);
 
             if(!response.ok){
                 const errorData = await response.json();
@@ -83,7 +92,7 @@ export default function RoomDesigner() {
 
             const data = await response.json();
             alert("Room successfully saved!");
-            console.long("Saved room:", data);
+            console.log("Saved room:", data);
         }catch(error){
             console.error("Save error:", error);
             alert("Error saving room: " + error.message);

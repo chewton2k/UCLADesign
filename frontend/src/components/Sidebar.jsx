@@ -37,7 +37,7 @@ const Sidebar = ({ onToolSelect }) => {
 
   const handleRooms = async () => {
     try {
-      const response = await fetch("http://localhost:5001/api/dorms");
+      const response = await fetch("http://localhost:5001/api/dorms/");
       if (!response.ok) {
         throw new Error('Failed to fetch rooms');
       }
