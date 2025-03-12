@@ -1,34 +1,50 @@
-import React, {useState, useRef} from "react";
+// RoomDesigner.jsx
+import React, { useState, useRef } from "react";
 
-export default function RoomDesigner(){
-    const [objects, setObjects] = useState([]); // {id, src, x y }
-    const containerRef = useRef(null); //get position relative to view
+export default function RoomDesigner() {
+    const [objects, setObjects] = useState([]);
+    const [draggedObjectId, setDraggedObjectId] = useState(null);
+    const containerRef = useRef(null);
 
     const handleDrop = (e) => {
         e.preventDefault();
         const identifier = e.dataTransfer.getData("text/plain");
-        //get drop position relative to top left of the gird
         const offsetX = e.clientX - containerRef.current.getBoundingClientRect().left;
-        const offsetY = e.clientY - containerRef.current.getBoundingClientRect().top; 
+        const offsetY = e.clientY - containerRef.current.getBoundingClientRect().top;
 
-        const newObject = { //new object with id, coordinates, and image path
-            id: Date.now(),
-            src: `/images/${identifier}.png`,
-            identifier,
-            x: offsetX,
-            y: offsetY
-        };
-
-        setObjects((prev) => [...prev, newObject]);
+        // Check if we're moving an existing object
+        if (draggedObjectId) {
+            setObjects(prev => prev.map(obj => 
+                obj.id === draggedObjectId 
+                    ? { ...obj, x: offsetX, y: offsetY } 
+                    : obj
+            ));
+            setDraggedObjectId(null);
+        } else {
+            // Add new object
+            const newObject = {
+                id: Date.now(),
+                src: `/images/${identifier}.png`,
+                identifier,
+                x: offsetX,
+                y: offsetY
+            };
+            setObjects(prev => [...prev, newObject]);
+        }
     };
 
     const handleDragOver = (e) => {
         e.preventDefault();
     };
 
-    const gridSize = 20; //20 pixelspacing
+    const handleObjectDragStart = (e, id) => {
+        setDraggedObjectId(id);
+        e.dataTransfer.setData("text/plain", "move"); // Set some data for FF compatibility
+    };
 
-    return(
+    const gridSize = 20;
+
+    return (
         <div className="p-4">
             <h1 className="text-2xl font-bold mb-4">Room Designer</h1>
             
@@ -45,18 +61,20 @@ export default function RoomDesigner(){
                         alt={obj.identifier}
                         className="absolute w-16 h-16 cursor-pointer"
                         style={{ left: obj.x, top: obj.y }}
+                        draggable
+                        onDragStart={(e) => handleObjectDragStart(e, obj.id)}
                     />
                 ))}
             </div>
-        
 
             <style jsx>{`
-                .grid-bg{
-                background-size: ${gridSize}px ${gridSize}px;
-                background-image:
-                    linear-gradient(to right, #e2e8f0 1px, transparent 1px),
-                    linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
-            }`}</style>
+                .grid-bg {
+                    background-size: ${gridSize}px ${gridSize}px;
+                    background-image:
+                        linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+                        linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
+                }
+            `}</style>
         </div>
     )
 }
