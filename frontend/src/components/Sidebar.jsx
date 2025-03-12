@@ -7,6 +7,7 @@ const Sidebar = ({ onToolSelect }) => {
     const [showChecklistPopup, setShowChecklistPopup] = useState(false);
     const [showRoomListPopup, setShowRoomListPopup] = useState(false);
     const [roomOptions, setRoomOptions] = useState([]);
+    const [furnitureOptions, setFurnitureOptions] = useState([]); 
   
     const sidebarRef = useRef(null);
     const objectsButtonRef = useRef(null);
@@ -38,11 +39,12 @@ const Sidebar = ({ onToolSelect }) => {
   const handleRooms = async () => {
     try {
       const response = await fetch("http://localhost:5001/api/dorms/");
+
       if (!response.ok) {
         throw new Error('Failed to fetch rooms');
       }
       const data = await response.json();
-      
+
       const formattedRooms = data.map(room => ({
         type: room._id,
         label: room.roomType,
@@ -53,22 +55,41 @@ const Sidebar = ({ onToolSelect }) => {
       
       setRoomOptions(formattedRooms);
     } catch (error) {
-      console.error("Error fetching rooms:", error);
+      console.error("Error fetching rooms: ", error);
     }
   };
 
+  const handleFurniture = async () => {
+    try {
+        const response = await fetch("http://localhost:5001/api/furniture/");
+  
+        if (!response.ok) {
+          throw new Error('Failed to fetch furniture');
+        }
+        const data = await response.json();
+  
+        const formattedFurniture = data.map(furniture => ({
+              type: furniture._id, 
+              label: furniture.name, 
+              image: `${furniture.image}`, 
+              dimensions: `${furniture.length}inches x ${furniture.width}inches x ${furniture.height}inches`
+  
+        })); 
+        
+        setFurnitureOptions(formattedFurniture); 
+      } catch (error) {
+        console.error("Error fetching furniture ", error);
+      }
+    }; 
+
   useEffect(() => {
     handleRooms(); 
+    handleFurniture(); 
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
-  const objectOptions = [
-    { type: "rectangle", label: "Rectangle", color: "bg-blue-500" },
-    { type: "circle", label: "Circle", color: "bg-green-500" },
-  ];
 
 
   return (
@@ -137,10 +158,32 @@ const Sidebar = ({ onToolSelect }) => {
 
 
 {showObjectsPopup && (
-        <div ref={objectsPopupRef} className="absolute top-20 left-64 bg-white border p-4 rounded shadow-md z-10">
-          <SearchBar objectOptions={objectOptions} onToolSelect={onToolSelect} />
-        </div>
-      )}
+  <div ref={objectsPopupRef} className="absolute top-20 left-64 bg-white border p-4 rounded shadow-md z-10">
+    <div className="grid grid-cols-1 gap-4 max-h-200 overflow-y-auto">
+      <li>
+        {furnitureOptions.map((furniture) => (
+          <div
+            key={furniture.type}
+            className="p-4 border rounded-lg cursor-pointer hover:bg-gray-300"
+            draggable
+            onDragStart={(e) => {
+              e.dataTransfer.setData("text/plain", furniture.image);
+              onToolSelect(room); 
+            }}
+          >
+            <img 
+              src={furniture.image} 
+              alt={furniture.label}
+              className="w-full h-32 object-cover mb-2 rounded"
+            />
+            <div className="font-semibold">{furniture.label}</div>
+            <div className="text-sm text-gray-600">{furniture.dimensions}</div>
+          </div>
+        ))}
+      </li>
+    </div>
+  </div>
+)}
 
 {showChecklistPopup && (
         <div ref={checklistPopupRef} className="absolute top-20 left-64 bg-white border p-4 rounded shadow-md z-10">
