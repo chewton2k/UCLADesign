@@ -49,3 +49,22 @@ exports.deleteFurniture = async (req, res) => {
         res.status(50).json({ error: err.message });
     }
 };
+
+exports.addTemplateToFurniture = async (req, res) => {///
+    const {id} = req.params; 
+    const {imageUrl, rating} = req.body;
+
+    try {
+        const furniture = await Furniture.findById(id);
+        if (!furniture) {
+            return res.status(404).json({ message: "Furniture is not found" });
+        }
+
+        furniture.templates.push({ imageUrl, rating });
+        await furniture.save();
+
+        res.status(201).json(furniture);
+    } catch (error) {
+        res.status(500).json({ message: "Error while adding template", error });
+    }
+};
