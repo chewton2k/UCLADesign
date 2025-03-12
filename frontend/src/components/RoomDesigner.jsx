@@ -1,4 +1,3 @@
-// RoomDesigner.jsx
 import React, { useState, useRef } from "react";
 
 export default function RoomDesigner() {
@@ -12,7 +11,7 @@ export default function RoomDesigner() {
         const offsetX = e.clientX - containerRef.current.getBoundingClientRect().left;
         const offsetY = e.clientY - containerRef.current.getBoundingClientRect().top;
 
-        // Check if we're moving an existing object
+        //check if we're moving an existing object
         if (draggedObjectId) {
             setObjects(prev => prev.map(obj => 
                 obj.id === draggedObjectId 
@@ -21,7 +20,7 @@ export default function RoomDesigner() {
             ));
             setDraggedObjectId(null);
         } else {
-            // Add new object
+            //else add a new object
             const newObject = {
                 id: Date.now(),
                 src: `/images/${identifier}.png`,
@@ -39,7 +38,7 @@ export default function RoomDesigner() {
 
     const handleObjectDragStart = (e, id) => {
         setDraggedObjectId(id);
-        e.dataTransfer.setData("text/plain", "move"); // Set some data for FF compatibility
+        e.dataTransfer.setData("text/plain", "move"); //set as random data 
     };
 
     const gridSize = 20;
@@ -52,7 +51,7 @@ export default function RoomDesigner() {
                 ref={containerRef}
                 onDrop={handleDrop}
                 onDragOver={handleDragOver}
-                className="relative w-full h-[600px] bg-white border grid-bg"
+                className="relative w-full h-[800px] bg-white border grid-bg"
             >
                 {objects.map((obj) => (
                     <img
