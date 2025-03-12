@@ -4,6 +4,7 @@ import CheckList from "./Checklist";
 const Sidebar = ({ onToolSelect }) => {
   const [showObjectsPopup, setShowObjectsPopup] = useState(false);
   const [showChecklistPopup, setShowChecklistPopup] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const sidebarRef = useRef(null); 
   const objectsButtonRef = useRef(null); 
@@ -22,7 +23,17 @@ const Sidebar = ({ onToolSelect }) => {
   const PopupClose = () => {
     setShowChecklistPopup(false);
     setShowObjectsPopup(false);
+    setSearchQuery("");
   };
+
+  const objectOptions = [
+    { type: "rectangle", label: "Rectangle", color: "bg-blue-500" },
+    { type: "circle", label: "Circle", color: "bg-green-500" }
+  ];
+
+  const filteredOptions = objectOptions.filter((obj) =>
+  obj.label.toLowerCase().includes(searchQuery.toLowerCase())
+);
 
   const handleClickOutside = (event) => {
     if (
@@ -41,10 +52,6 @@ const Sidebar = ({ onToolSelect }) => {
     };
   }, []);
 
-  const objectOptions = [
-    { type: "rectangle", label: "Rectangle", color: "bg-blue-500" },
-    { type: "circle", label: "Circle", color: "bg-green-500" }
-  ];
 
   return (
     <div
