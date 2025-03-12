@@ -11,7 +11,7 @@ export default function RoomDesigner(){
         const offsetX = e.clientX - containerRef.current.getBoundingClientRect().left;
         const offsetY = e.clientY - containerRef.current.getBoundingClientRect().top; 
 
-        const newObejct = { //new object with id, coordinates, and image path
+        const newObject = { //new object with id, coordinates, and image path
             id: Date.now(),
             src: `/images/${identifier}.png`,
             identifier,
