@@ -5,29 +5,17 @@ export default function RoomDesigner() {
     const [draggedObjectId, setDraggedObjectId] = useState(null);
     const containerRef = useRef(null);
 
-    const defaultDorms = ["classic", "deluxe", "plaze_v1", "plaza_v2"];
-
     const handleDrop = (e) => {
         e.preventDefault();
         const imagePath = e.dataTransfer.getData("text/plain"); // Get the image path
         const offsetX = e.clientX - containerRef.current.getBoundingClientRect().left;
         const offsetY = e.clientY - containerRef.current.getBoundingClientRect().top;
 
-        //check that the first image is a room type image
-        if(objects.length === 0 && !defaultDorms.includes(identifier)){
-            alert("You must first add a room schematic (e.g. classic, deluxe, or plaza dorm.");
-            return;
-        }
-        //make sure that you can't add more than one room
-        if(objects.length > 0 && defaultDorms.includes(identifier) && defaultDorms.includes(objects[0].identifier)){
-            alert("Only one room floor plan can be placed.");
-            return;
-        }
-        //check if we're moving an existing object
+        // Check if we're moving an existing object
         if (draggedObjectId) {
-            setObjects(prev => prev.map(obj => 
-                obj.id === draggedObjectId 
-                    ? { ...obj, x: offsetX, y: offsetY } 
+            setObjects(prev => prev.map(obj =>
+                obj.id === draggedObjectId
+                    ? { ...obj, x: offsetX, y: offsetY }
                     : obj
             ));
             setDraggedObjectId(null);
@@ -101,9 +89,9 @@ export default function RoomDesigner() {
     };
 
     const handleClearRoom = () =>{
-        if(objects.length > 0){
-            const keep = objects[0];
-            setObjects([first]);
+        if(objects.length >= 1){
+            let keep = objects[0];
+            setObjects([keep]);
         }else{
             alert("No room to be preserved.");
         }
