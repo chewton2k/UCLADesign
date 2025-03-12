@@ -87,4 +87,8 @@ const getUsers = async (req, res) => {
   res.json(users);
 };
 
+
+//need to get user's rooms and display them in their saved 
+//will have to tie and can save using the frontend calling the window.sessionStorage.getItem("userName");
+
 module.exports = { registerUser, userLogin, getUsers };
