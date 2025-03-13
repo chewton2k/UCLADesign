@@ -17,25 +17,25 @@ This is a full-stack web application project built with a **React frontend** and
 
 # Features
 
-1. Checklist of What to Bring \\ 
+1. Checklist of What to Bring <br />
 This feature generates a comprehensive, customizable checklist. It ensures that individuals know exactly what items they need, from essentials like bedding and kitchenware to optional decor items. The checklist could be dynamically updated as users make adjustments to their room design, reflecting changes in required items.
 
-2. User Can Meaningfully Search Through Server Data. \\ 
+2. User Can Meaningfully Search Through Server Data. <br />
 The database will include a curated collection of popular room layouts and designs based on real-world examples from UCLA dorms and other comparable spaces. Each design will come with a breakdown of default furniture that is already in the room upon arrival.
 
-3. App Can Display Dynamic Data to the User. \\ 
+3. App Can Display Dynamic Data to the User. <br /> 
 Users will have the ability to review and save existing room designs in the database. This feature will also display the current templates of each design allowing new users to browse user generated designs and make more informed choices when selecting a template.
 
-4. Search for Room Design \\ 
+4. Search for Room Design<br /> 
 A search function will enable users to quickly find room types that match their choices or assigned rooms for the year. Users can filter and sort these rooms based on criteria such as room type, occupation size, and size. 
 
-5. Users Can Upload Data to the Back-end \\ 
+5. Users Can Upload Data to the Back-end<br />
 This feature empowers users to define custom items within the room design tool. Users can specify details like the dimensions and design of an item. These custom items can then be saved and integrated into their room designs and database for future use. 
 
-6. Allow Users to Sign In \\
+6. Allow Users to Sign In <br />
 Implementing a sign-in system will allow users to save their designs, preferences, and checklists across sessions. This keeps an accurate and up-to-date database of all user information.
 
-7. Prices for Dorms \\ 
+7. Prices for Dorms <br />
 Our project will include a database of UCLA dorm rooms with associated pricing information. Users can compare dorm options based on their budget and see how each layout aligns with their design preferences. 
 
 
