@@ -3,6 +3,7 @@ import Checklist from "./Checklist";
 import SearchBar from "./SearchBar";
 import HandleNewFurniture from "./HandleNewFurniture";
 import RoomDesigner from "./RoomDesigner";
+import TodoListForm from "./TodoListForm";
 
 const Sidebar = ({ onToolSelect, loadDesign }) => {
   const [showObjectsPopup, setShowObjectsPopup] = useState(false);
@@ -14,6 +15,7 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
   const [newFurnitureListPopup, setNewFurnitureListPopup] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [savedDesigns, setSavedDesigns] = useState([]);
+  const [showlistToDO, setlistToDo] = useState(false); 
 
   const savedRoomref = useRef(null);
   const sidebarRef = useRef(null);
@@ -25,6 +27,7 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
   const roomPopupRef = useRef(null);
   const newFurnitureref = useRef(null);
   const savedPopupRef = useRef(null);
+  const listPopupRef = useRef(null); 
 
   const PopupClose = () => {
     setShowChecklistPopup(false);
@@ -32,6 +35,7 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
     setShowRoomListPopup(false);
     setSearchQuery("");
     setSavedRoomListPopup(false);
+    setlistToDo(false); 
   };
 
   const handleClickOutside = (event) => {
@@ -39,6 +43,7 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
       !objectsButtonRef.current.contains(event.target) &&
       !checklistButtonRef.current.contains(event.target) &&
       !roomButtonRef.current.contains(event.target) &&
+      !listPopupRef.current.contains(event.target) &&
       !objectsPopupRef.current?.contains(event.target) &&
       !checklistPopupRef.current?.contains(event.target) &&
       !roomPopupRef.current?.contains(event.target) &&
@@ -220,6 +225,18 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
           altText="Saved"
           buttonText="Saved"
         />
+
+        {/* List Button */}
+        <IconButton
+          ref={listPopupRef}
+          onClick={() => {
+            PopupClose();
+            setlistToDo(!showlistToDO);
+          }}
+          imgSrc="/list.png"
+          altText="Saved"
+          buttonText="Saved"
+        />
       </div>
 
       {/* Room List Popup */}
@@ -344,6 +361,15 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
          </ul>
          </div>
          )}
+
+    {showlistToDO&& (
+        <div
+          ref={listPopupRef}
+          className="absolute top-20 left-64 bg-white border p-4 rounded-lg shadow-md z-10"
+        >
+          <TodoListForm/>
+        </div>
+      )}
     </div>
   );
 };
