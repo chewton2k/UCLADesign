@@ -125,8 +125,18 @@ const RegistrationForm = ({ formType }) => {
                     </button>
                 </div>
                 <button type="submit" className="bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">
-                    Sign In
+                    Log In
                 </button>
+                <p className="text-sm text-blue-500">
+                    Forgot Password?
+                </p>
+                <p className="text-md text-white">
+                    Don't have an account?
+                    <a href="/signup" className="text-blue-500 font-md hover:underline ml-1"> 
+                     Sign up!
+                    </a>
+                </p>
+
             </form>
         </div>
     );
