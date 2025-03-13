@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 const Checklist = () => {
-    // State for essential items
     const [items, setItems] = useState(() => {
         const savedItems = window.sessionStorage.getItem('checklistItems');
         return savedItems
@@ -16,7 +15,7 @@ const Checklist = () => {
               ];
     });
 
-    // State for optional items
+
     const [optionalItems, setOptionalItems] = useState(() => {
         const savedOptionals = window.sessionStorage.getItem('optionalItems');
         return savedOptionals
@@ -30,46 +29,46 @@ const Checklist = () => {
               ];
     });
 
-    // State for user input in the "add item" field
+
     const [newItem, setNewItem] = useState('');
 
-    // State to toggle between adding to essentials or optionals
+
     const [isAddingToOptional, setIsAddingToOptional] = useState(false);
 
-    // Save changes to session storage whenever items or optionalItems change
+
     useEffect(() => {
         window.sessionStorage.setItem('checklistItems', JSON.stringify(items));
         window.sessionStorage.setItem('optionalItems', JSON.stringify(optionalItems));
     }, [items, optionalItems]);
 
-    // Toggle the "checked" state of an item
+
     const toggleCheck = (id, isOptional) => {
-        const setItems = isOptional ? setOptionalItems : setItems;
+        const setItemsFn = isOptional ? setOptionalItems : setItems;
         const currentItems = isOptional ? optionalItems : items;
 
-        const updatedItems = currentItems.map(item =>
-            item.id === id ? { ...item, checked: !item.checked } : item
+        setItemsFn(prevItems => 
+            prevItems.map(item =>
+                item.id === id ? { ...item, checked: !item.checked } : item
+            ).sort((a, b) => a.checked - b.checked)
         );
-
-        setItems([...updatedItems].sort((a, b) => a.checked - b.checked)); 
     };
 
     const addItem = () => {
         if (newItem.trim()) {
-            const setItems = isAddingToOptional ? setOptionalItems : setItems;
+            const setItemsFn = isAddingToOptional ? setOptionalItems : setItems;
             const currentItems = isAddingToOptional ? optionalItems : items;
 
             const newEntry = { id: Date.now(), text: newItem, checked: false };
-            setItems([...currentItems, newEntry]); 
-            setNewItem(''); 
+            setItemsFn(prevItems => [...prevItems, newEntry]);
+            setNewItem('');
         }
     };
 
     const deleteItem = (id, isOptional) => {
-        const setItems = isOptional ? setOptionalItems : setItems;
+        const setItemsFn = isOptional ? setOptionalItems : setItems;
         const currentItems = isOptional ? optionalItems : items;
 
-        setItems(currentItems.filter(item => item.id !== id));
+        setItemsFn(prevItems => prevItems.filter(item => item.id !== id));
     };
 
     return (
@@ -141,11 +140,11 @@ const Checklist = () => {
                                 <input
                                     type="checkbox"
                                     checked={item.checked}
-                                    onChange={() => toggleCheck(item.id, true)} // Toggle for Optionals
+                                    onChange={() => toggleCheck(item.id, true)} 
                                     className="ml-2 h-5 w-5 cursor-pointer"
                                 />
                                 <button
-                                    onClick={() => deleteItem(item.id, true)} // Delete for Optionals
+                                    onClick={() => deleteItem(item.id, true)} 
                                     className="ml-2 px-2 py-1 bg-red-500 text-white rounded-md hover:bg-red-600"
                                 >
                                     Delete

@@ -305,7 +305,7 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
       {showChecklistPopup && (
         <div
           ref={checklistPopupRef}
-          className="absolute top-20 left-64 bg-white border p-4 rounded-lg shadow-md z-10 w-64"
+          className="absolute top-20 left-64 bg-white border p-4 rounded-lg shadow-md z-10 w-120"
         >
           <Checklist />
         </div>
