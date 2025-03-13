@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-export default function RoomDesigner() {
-    const [objects, setObjects] = useState([]);
+export default function RoomDesigner({ objects, setObjects }) {
     const [draggedObjectId, setDraggedObjectId] = useState(null);
     const containerRef = useRef(null);
 
