@@ -5,10 +5,11 @@ const Checklist = () => {
         const savedItems = window.sessionStorage.getItem('checklistItems');
         return savedItems ? JSON.parse(savedItems) : [
             { id: 1, text: 'Bedding (sheets, pillows, blankets)', checked: false },
-            { id: 2, text: 'Laptop and charger', checked: false },
+            { id: 2, text: 'Electronics (laptop, chargers, powerstrip)', checked: false },
             { id: 3, text: 'Toiletries', checked: false },
-            { id: 4, text: 'Important documents (ID, insurance, etc.)', checked: false },
-            { id: 5, text: 'School supplies (notebooks, pens, etc.)', checked: false }
+            { id: 4, text: 'Laundry supplies (detergent, fabric softener, etc.)',check: false},
+            { id: 5, text: 'Important documents (ID, insurance, etc.)', checked: false },
+            { id: 6, text: 'School supplies (notebooks, pens, etc.)', checked: false }
         ];
     });
 

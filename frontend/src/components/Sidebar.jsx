@@ -11,6 +11,7 @@ const Sidebar = ({ onToolSelect }) => {
     const [furnitureOptions, setFurnitureOptions] = useState([]); 
     const [savedRoomListPopup, setSavedRoomListPopup] = useState(false); 
     const [newFurnitureListPopup, setNewFurnitureListPopup] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
 
     const savedRoomref = useRef(null); 
     const sidebarRef = useRef(null);
@@ -26,6 +27,7 @@ const Sidebar = ({ onToolSelect }) => {
       setShowChecklistPopup(false);
       setShowObjectsPopup(false);
       setShowRoomListPopup(false);
+      setSearchQuery(""); 
     };
   
     const handleClickOutside = (event) => {
@@ -106,6 +108,17 @@ const Sidebar = ({ onToolSelect }) => {
     };
   }, []);
 
+  const handleToolSelect = (selectedTool) => {
+    console.log("Selected Tool:", selectedTool);
+  };
+
+  const filteredRoomOptions = roomOptions.filter((room) =>
+    room.label.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const filteredFurnitureOptions = furnitureOptions.filter((furniture) =>
+    furniture.label.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div
@@ -116,7 +129,8 @@ const Sidebar = ({ onToolSelect }) => {
   <button
     ref={objectsButtonRef}
     className="block px-3 py-7 z-10 border-black border-2 rounded-4xl hover:opacity-30 font-light text-center"
-    onClick={() => setShowObjectsPopup(!showObjectsPopup)}
+    onClick={() => {PopupClose(); 
+        setShowObjectsPopup(!showObjectsPopup);}}
   >
     Furniture
   </button>
@@ -126,7 +140,9 @@ const Sidebar = ({ onToolSelect }) => {
   <button
     ref={checklistButtonRef}
     className="block px-3 py-7 z-10 border-black border-2 rounded-4xl hover:opacity-30 font-light text-center"
-    onClick={() => setShowChecklistPopup(!showChecklistPopup)}
+    onClick={() => {
+         PopupClose(); 
+         setShowChecklistPopup(!showChecklistPopup);}}
   >
     Checklist
   </button>
@@ -136,7 +152,9 @@ const Sidebar = ({ onToolSelect }) => {
   <button
     ref={roomButtonRef}
     className="block px-3 py-7 z-10 border-black border-2 rounded-4xl hover:opacity-30 font-light text-center"
-    onClick={() => setShowRoomListPopup(!showRoomListPopup)}
+    onClick={() => {
+        PopupClose(); 
+        setShowRoomListPopup(!showRoomListPopup);}}
   >
     Dorms
   </button>
@@ -144,7 +162,9 @@ const Sidebar = ({ onToolSelect }) => {
  <button
     ref={newFurnitureref}
     className="block px-3 py-7 z-10 border-black border-2 rounded-4xl hover:opacity-30 font-light text-center"
-    onClick={() => setNewFurnitureListPopup(true)}
+    onClick={() => {
+        PopupClose(); 
+        setNewFurnitureListPopup(true);}}
     >
     Add Your Own Furniture
   </button>
@@ -152,69 +172,94 @@ const Sidebar = ({ onToolSelect }) => {
   <button
     ref={savedRoomref}
     className="block px-3 py-7 z-10 border-black border-2 rounded-4xl hover:opacity-30 font-light text-center"
-    onClick={() => setSavedRoomListPopup(!savedRoomListPopup)}
+    onClick={() => {
+        PopupClose(); 
+        setSavedRoomListPopup(!savedRoomListPopup);}}
   >
     Saved
   </button>
 </div>
 
+{/* Room List Popup */}
 {showRoomListPopup && (
-  <div ref={roomPopupRef} className="absolute top-20 left-64 bg-white border p-4 rounded shadow-md z-10">
-    <div className="grid grid-cols-1 gap-4 max-h-200 overflow-y-auto">
-      <li>
-        {roomOptions.map((room) => (
-          <div
-            key={room.type}
-            className="p-4 border rounded-lg cursor-pointer hover:bg-gray-300"
-            draggable
-            onDragStart={(e) => {
-              e.dataTransfer.setData("text/plain", room.image);
-              onToolSelect(room); 
-            }}
-          >
-            <img 
-              src={room.image} 
-              alt={room.label}
-              className="w-full h-32 object-cover mb-2 rounded"
-            />
-            <div className="font-semibold">{room.label}</div>
-            <div className="text-sm text-gray-600">{room.dimensions}</div>
-            <div className="text-sm font-medium text-green-600">{room.price}</div>
+        <div
+          ref={roomPopupRef}
+          className="absolute top-20 left-64 bg-white border p-4 rounded shadow-md z-10"
+        >
+          {/* Search Bar */}
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search rooms..."
+            className="w-full p-2 border rounded-md mb-2"
+          />
+          <div className="grid grid-cols-1 gap-4 max-h-200 overflow-y-auto">
+            {filteredRoomOptions.map((room) => (
+              <div
+                key={room.type}
+                className="p-4 border rounded-lg cursor-pointer hover:bg-gray-300"
+                draggable
+                onDragStart={(e) => {
+                  e.dataTransfer.setData("text/plain", room.image);
+                  handleToolSelect(room);
+                }}
+              >
+                <img
+                  src={room.image}
+                  alt={room.label}
+                  className="w-full h-32 object-cover mb-2 rounded"
+                />
+                <div className="font-semibold">{room.label}</div>
+                <div className="text-sm text-gray-600">{room.dimensions}</div>
+                <div className="text-sm font-medium text-green-600">
+                  {room.price}
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </li>
-    </div>
-  </div>
-)}
+        </div>
+      )}
 
 
 {showObjectsPopup && (
-  <div ref={objectsPopupRef} className="absolute top-20 left-64 bg-white border p-4 rounded shadow-md z-10">
-    <div className="grid grid-cols-1 gap-4 max-h-200 overflow-y-auto">
-      <li>
-        {furnitureOptions.map((furniture) => (
-          <div
-            key={furniture.type}
-            className="p-4 border rounded-lg cursor-pointer hover:bg-gray-300"
-            draggable
-            onDragStart={(e) => {
-              e.dataTransfer.setData("text/plain", furniture.image);
-              onToolSelect(room); 
-            }}
-          >
-            <img 
-              src={furniture.image} 
-              alt={furniture.label}
-              className="w-full h-32 object-cover mb-2 rounded"
-            />
-            <div className="font-semibold">{furniture.label}</div>
-            <div className="text-sm text-gray-600">{furniture.dimensions}</div>
+        <div
+          ref={objectsPopupRef}
+          className="absolute top-20 left-64 bg-white border p-4 rounded shadow-md z-10"
+        >
+          {/* Search Bar */}
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search furniture..."
+            className="w-full p-2 border rounded-md mb-2"
+          />
+          <div className="grid grid-cols-1 gap-4 max-h-200 overflow-y-auto">
+            {filteredFurnitureOptions.map((furniture) => (
+              <div
+                key={furniture.type}
+                className="p-4 border rounded-lg cursor-pointer hover:bg-gray-300"
+                draggable
+                onDragStart={(e) => {
+                  e.dataTransfer.setData("text/plain", furniture.image);
+                  handleToolSelect(furniture);
+                }}
+              >
+                <img
+                  src={furniture.image}
+                  alt={furniture.label}
+                  className="w-full h-32 object-cover mb-2 rounded"
+                />
+                <div className="font-semibold">{furniture.label}</div>
+                <div className="text-sm text-gray-600">
+                  {furniture.dimensions}
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </li>
-    </div>
-  </div>
-)}
+        </div>
+      )}
 
 {showChecklistPopup && (
         <div ref={checklistPopupRef} className="absolute top-20 left-64 bg-white border p-4 rounded shadow-md z-10">
