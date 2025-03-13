@@ -123,17 +123,14 @@ export default function RoomDesigner({ objects, setObjects }) {
 
     //click outside popup = close
     useEffect(() => {
-        const handleClickOutside = (e) => {
-            if (
-                (popupRef.current && !popupRef.current.contains(e.target)) &&
-                (containerRef.current && !containerRef.current.contains(e.target))
-            ) {
-                setSelectedObjectId(null);
-            }
-        };
-        document.addEventListener("mousedown", handleClickOutside);
-        return() => document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
+         const handleClickOutside = (e) => {
+             if(popupRef.current && !popupRef.current.contains(e.target)){
+                 setSelectedObjectId(null);
+             }
+         };
+         document.addEventListener("mousedown", handleClickOutside);
+         return() => document.removeEventListener("mousedown", handleClickOutside);
+     }, []);
 
     const handleRotate = (id) => {
         setObjects((prevObjects) =>
