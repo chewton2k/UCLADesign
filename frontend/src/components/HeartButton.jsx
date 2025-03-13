@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 const HeartButton = ({ designId }) => {
   const [isSaved, setIsSaved] = useState(false);
   const userName = window.sessionStorage.getItem("userName");
-
+  const loggedIn = window.sessionStorage.getItem("UserLoggedIn"); 
+    //  const loggedIn = window.sessionStorage.setItem("UserLoggedIn", "true"); 
   // Check if design is already saved
   useEffect(() => {
     const checkSavedStatus = async () => {
@@ -20,7 +21,7 @@ const HeartButton = ({ designId }) => {
   }, [designId, userName]);
 
   const handleSave = async () => {
-    if (!userName) {
+    if (!userName || (loggedIn === "false")) {
       alert("Please login to save designs");
       return;
     }

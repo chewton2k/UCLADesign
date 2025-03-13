@@ -97,6 +97,7 @@ export default function RoomDesigner({ objects, setObjects }) {
             const data = await response.json();
             alert("Room successfully saved!");
             console.log("Saved room:", data);
+            window.location.reload();
         }catch(error){
             console.error("Save error:", error);
             alert("Error saving room: " + error.message);
@@ -118,7 +119,6 @@ export default function RoomDesigner({ objects, setObjects }) {
 
     //Popup handler state
     const [selectedObjectId, setSelectedObjectId] = useState(null);
-    const [rotationAngles, setRotationAngles] = useState({});
     const popupRef = useRef(null);
 
     //click outside popup = close

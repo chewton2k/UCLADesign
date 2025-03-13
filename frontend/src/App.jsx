@@ -16,11 +16,10 @@ function App() {
                 <Route path='/templates' element={<TemplatePage/>}> </Route>
                 <Route path='/login' element={<LogInPage/>}> </Route>
                 <Route path='/signup' element={<RegistrationPage/>}> </Route>
-                <Route path='/create-design' element={<CreateDesignPage/>}> </Route>
 
-                {/* <Route element={<ProtectedRoutes/>}> 
+                <Route element={<ProtectedRoutes/>}> 
                 <Route path='/create-design' element={<CreateDesignPage/>}> </Route>
-                </Route> */}
+                </Route>
 
             </Routes>
         </Router>
