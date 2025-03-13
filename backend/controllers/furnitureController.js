@@ -18,7 +18,7 @@ exports.getAllFurniture = async (req, res) => {
 exports.addFurniture = async (req, res) => {
     const { name, length, width, height, image, user} = req.body;
 
-    // Check for missing fields
+    //Check for missing fields
     if (!name || !length || !width || !height) {
         return res.status(400).json({ message: "All fields are required." });
     }

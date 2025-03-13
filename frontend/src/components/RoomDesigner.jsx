@@ -124,7 +124,10 @@ export default function RoomDesigner({ objects, setObjects }) {
     //click outside popup = close
     useEffect(() => {
         const handleClickOutside = (e) => {
-            if(popupRef.current && !popupRef.current.contains(e.target)){
+            if (
+                (popupRef.current && !popupRef.current.contains(e.target)) &&
+                (containerRef.current && !containerRef.current.contains(e.target))
+            ) {
                 setSelectedObjectId(null);
             }
         };

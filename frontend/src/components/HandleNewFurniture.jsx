@@ -6,9 +6,11 @@ const HandleNewFurniture = ({ onClose }) => {
         length: "",
         width: "",
         height: "",
-        user: ""
+        user: "",
+        image: null
     });
 
+    const [imagePreview, setImagePreview] = useState(null);
     const [error, setError] = useState("");
 
     const handleChange = (e) => {
@@ -16,24 +18,37 @@ const HandleNewFurniture = ({ onClose }) => {
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setFormData((prev) => ({ ...prev, image: reader.result })); 
+                setImagePreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const { name, length, width, height } = formData;
+        const { name, length, width, height, image } = formData;
 
         if (!name || !length || !width || !height) {
             setError("Please fill out all fields.");
             return;
         }
 
-        let userName = window.sessionStorage.getItem("userName");
+        const userName = window.sessionStorage.getItem("userName");
 
         const jsonData = {
             name,
             length: parseFloat(length),
             width: parseFloat(width),
             height: parseFloat(height),
-            user: userName
+            user: userName,
+            image
         };
 
         try {
@@ -55,7 +70,6 @@ const HandleNewFurniture = ({ onClose }) => {
             const result = await response.json();
             console.log("Furniture successfully added:", result);
             setError("");
-            onClose();
         } catch (error) {
             console.error("Error during furniture creation:", error);
             setError("An error occurred while adding furniture.");
@@ -102,6 +116,28 @@ const HandleNewFurniture = ({ onClose }) => {
                         onChange={handleChange}
                         className="w-full p-2 border rounded"
                     />
+                    <div className="w-full">
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Upload Image
+                        </label>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageChange}
+                            className="w-full p-2 border rounded"
+                        />
+                    </div>
+                    
+                    {imagePreview && (
+                        <div className="mt-2">
+                            <img 
+                                src={imagePreview} 
+                                alt="Preview" 
+                                className="h-40 w-auto object-contain rounded border p-1" 
+                            />
+                        </div>
+                    )}
+                    
                     <div className="flex justify-between">
                         <button
                             type="submit"

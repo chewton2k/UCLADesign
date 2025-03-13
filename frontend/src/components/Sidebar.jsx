@@ -50,7 +50,7 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
       !roomPopupRef.current?.contains(event.target) &&
       !savedPopupRef.current?.contains(event.target) &&
       !savedRoomref.current.contains(event.target) && 
-      !newFurnitureListPopup.curren.contains(event.target)
+      !newFurnitureListPopup.current.contains(event.target)
     ) {
       PopupClose();
     }
