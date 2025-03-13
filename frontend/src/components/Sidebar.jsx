@@ -158,7 +158,7 @@ const Sidebar = ({ onToolSelect }) => {
   >
     Dorms
   </button>
-
+  <div className="py-3"></div>
  <button
     ref={newFurnitureref}
     className="block px-3 py-7 z-10 border-black border-2 rounded-4xl hover:opacity-30 font-light text-center"
@@ -168,15 +168,20 @@ const Sidebar = ({ onToolSelect }) => {
     >
     Add Your Own Furniture
   </button>
+  <div className="py-3"></div>
 
   <button
     ref={savedRoomref}
-    className="block px-3 py-7 z-10 border-black border-2 rounded-4xl hover:opacity-30 font-light text-center"
+    className="block px-3 py-7 z-10 border-black border-2 rounded-4xl hover:opacity-30"
     onClick={() => {
         PopupClose(); 
         setSavedRoomListPopup(!savedRoomListPopup);}}
   >
-    Saved
+    <img 
+            src="/bookmark.png" 
+            alt="Save" 
+            className="w-16 h-auto rounded-lg shadow-lg z-10"
+          />
   </button>
 </div>
 
