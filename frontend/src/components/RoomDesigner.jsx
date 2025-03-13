@@ -31,7 +31,8 @@ export default function RoomDesigner({ objects, setObjects }) {
                     id: Date.now(),
                     src: imagePath,
                     x: offsetX,
-                    y: offsetY
+                    y: offsetY,
+                    rotation: 0
                 };
                 setObjects(prev => [...prev, newObject]);
             } else {
@@ -132,11 +133,14 @@ export default function RoomDesigner({ objects, setObjects }) {
     }, []);
 
     const handleRotate = (id) => {
-        setRotationAngles((prev) => ({
-            ...prev,
-            [id]: ((prev[id] || 0) + 90) % 360,
-        }));
-    };
+        setObjects((prevObjects) =>
+          prevObjects.map((obj) =>
+            obj.id === id
+              ? { ...obj, rotation: ((obj.rotation || 0) + 90) % 360 }
+              : obj
+          )
+        );
+      };
 
     const handleDelete = (id) => {
         setObjects((prev) => prev.filter((obj) => obj.id !== id));
@@ -184,7 +188,9 @@ export default function RoomDesigner({ objects, setObjects }) {
                 style={{
                     left: obj.x,
                     top: obj.y,
-                    transform: `translate(-50%, -50%) rotate(${rotationAngles[obj.id] || 0}deg)`
+                    transform: `translate(-50%, -50%) rotate(${obj.rotation || 0}deg)`,
+                    maxWidth: '100%',
+                    maxHeight: '100%',
                 }}
                 draggable
                 onClick={() => setSelectedObjectId(obj.id)}
@@ -206,7 +212,7 @@ export default function RoomDesigner({ objects, setObjects }) {
                     className="px-2 py-1 bg-blue-500 text-white rounded mb-2 w-full"
                     onClick={() => handleRotate(selectedObjectId)}
                 >
-                    Rotate 90°
+                    Rotate 90Â°
                 </button>
                 <button
                     className="px-2 py-1 bg-red-500 text-white rounded w-full"
