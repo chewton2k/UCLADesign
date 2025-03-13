@@ -178,25 +178,32 @@ export default function RoomDesigner({ objects, setObjects }) {
                 onDragOver={handleDragOver}
                 className="relative w-full h-[800px] bg-white border grid-bg"
             >     
-            {/* Drag And Drop */}
-            {objects.map((obj) => (
-                <img
-                key={obj.id}
-                src={obj.src}
-                alt="room-object"
-                className="absolute cursor-pointer"
-                style={{
-                    left: obj.x,
-                    top: obj.y,
-                    transform: `translate(-50%, -50%) rotate(${obj.rotation || 0}deg)`,
-                    maxWidth: '100%',
-                    maxHeight: '100%',
-                }}
-                draggable
-                onClick={() => setSelectedObjectId(obj.id)}
-                onDragStart={(e) => handleObjectDragStart(e, obj.id)}
-                />
-            ))}
+                {/* Drag And Drop */}
+                {objects.map((obj) => {
+                    const style = {
+                        left: obj.x,
+                        top: obj.y,
+                        transform: `translate(-50%, -50%) rotate(${obj.rotation || 0}deg)`,
+                        ...(obj.src === "/bean-bag.png" && {
+                            maxWidth: '10%',
+                            maxHeight: '10%'
+                        })
+                    };
+
+                    return (
+                        <img
+                            key={obj.id}
+                            src={obj.src}
+                            alt="room-object"
+                            className="absolute cursor-pointer"
+                            style={style}
+                            draggable
+                            onClick={() => setSelectedObjectId(obj.id)}
+                            onDragStart={(e) => handleObjectDragStart(e, obj.id)}
+                        />
+                    );
+                })}
+
 
             {/* Popup */}
             {selectedObjectId !== null && (
@@ -212,7 +219,7 @@ export default function RoomDesigner({ objects, setObjects }) {
                     className="px-2 py-1 bg-blue-500 text-white rounded mb-2 w-full"
                     onClick={() => handleRotate(selectedObjectId)}
                 >
-                    Rotate 90Â°
+                    Rotate 90°
                 </button>
                 <button
                     className="px-2 py-1 bg-red-500 text-white rounded w-full"

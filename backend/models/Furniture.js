@@ -16,7 +16,7 @@ const furnitureSchema = new mongoose.Schema({
     length: { type: Number, required: true },
     width: { type: Number, required: true },
     height: { type: Number, required: true },
-    image: { type: String, required: true },
+    image: { type: String, required: true, default: "/bean-bag.png"},
     user: { type: String, required: true, default: "All" } 
 });
 
