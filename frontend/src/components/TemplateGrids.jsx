@@ -7,7 +7,7 @@ const TemplateGrid = () => {
     const [templates, setTemplates] = useState([]); //store backend template data?
 
     useEffect(() => {
-        fetch("http://localhost:5001/api/designs")
+        fetch("http://localhost:5001/api/designs/getDesigns")
             .then(response => response.json())
             .then(data => setTemplates(data))
             .catch(error => console.error("Error fetching designs:", error));
