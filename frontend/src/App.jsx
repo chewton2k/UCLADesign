@@ -17,6 +17,7 @@ function App() {
                 <Route path='/login' element={<LogInPage/>}> </Route>
                 <Route path='/signup' element={<RegistrationPage/>}> </Route>
                 <Route path='/create-design' element={<CreateDesignPage/>}> </Route>
+                <Route path='/todo-list' element={<TodoListPage/>}> </Route>
 
                 {/* <Route element={<ProtectedRoutes/>}> 
                 <Route path='/create-design' element={<CreateDesignPage/>}> </Route>
