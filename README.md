@@ -33,10 +33,13 @@ A search function will enable users to quickly find room types that match their 
 This feature empowers users to define custom items within the room design tool. Users can specify details like the dimensions and design of an item. These custom items can then be saved and integrated into their room designs and database for future use. 
 
 6. **Authentication and User SignIn** <br />
-Implementing a sign-in system will allow users to save their designs, preferences, and checklists across sessions. This keeps an accurate and up-to-date database of all user information.
+Implementing a sign-in system will allow users to save their designs, preferences, and checklists across sessions. This keeps an accurate and up-to-date database of all user information. There are also password encryption features and security designs (password requirements and limited attempts). 
 
 7. **Prices/Information for Dorms** <br />
 Our project will include a database of UCLA dorm rooms with associated pricing information. Users can compare dorm options based on their budget and see how each layout aligns with their design preferences. 
+
+8. **Saving Other User's Designs** <br/> 
+Users can save other designs posted by other users and can modify the room to their own taste. This promotes collaboration between users, personal contribution and tailored experience towards everybody's needs. 
 
 
 ## Installing the Project
