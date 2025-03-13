@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Checklist from "./Checklist";
 import SearchBar from "./SearchBar";
+import HandleNewFurniture from "./HandleNewFurniture";
 
 const Sidebar = ({ onToolSelect }) => {
     const [showObjectsPopup, setShowObjectsPopup] = useState(false);
@@ -8,7 +9,10 @@ const Sidebar = ({ onToolSelect }) => {
     const [showRoomListPopup, setShowRoomListPopup] = useState(false);
     const [roomOptions, setRoomOptions] = useState([]);
     const [furnitureOptions, setFurnitureOptions] = useState([]); 
-  
+    const [savedRoomListPopup, setSavedRoomListPopup] = useState(false); 
+    const [newFurnitureListPopup, setNewFurnitureListPopup] = useState(false);
+
+    const savedRoomref = useRef(null); 
     const sidebarRef = useRef(null);
     const objectsButtonRef = useRef(null);
     const checklistButtonRef = useRef(null);
@@ -16,6 +20,7 @@ const Sidebar = ({ onToolSelect }) => {
     const objectsPopupRef = useRef(null);
     const checklistPopupRef = useRef(null);
     const roomPopupRef = useRef(null);
+    const newFurnitureref = useRef(null); 
   
     const PopupClose = () => {
       setShowChecklistPopup(false);
@@ -60,36 +65,37 @@ const Sidebar = ({ onToolSelect }) => {
   };
 
   const handleFurniture = async () => {
+    let userName = window.sessionStorage.getItem("userName"); 
+
     try {
-        const response = await fetch("http://localhost:5001/api/furniture/");
-  
+        const response = await fetch(`http://localhost:5001/api/furniture?username=${userName}`);
         if (!response.ok) {
-          throw new Error('Failed to fetch furniture');
+            throw new Error('Failed to fetch furniture');
         }
+
         const data = await response.json();
-  
+
         const formattedFurniture = data.map(furniture => ({
-              type: furniture._id, 
-              label: furniture.name, 
-              image: `${furniture.image}`, 
-              dimensions: `${furniture.length}inches x ${furniture.width}inches x ${furniture.height}inches`
-  
-        })); 
-        
-        setFurnitureOptions(formattedFurniture); 
-      } catch (error) {
-        console.error("Error fetching furniture ", error);
-      }
-    }; 
+            type: furniture._id,
+            label: furniture.name,
+            image: `${furniture.image}`,
+            dimensions: `${furniture.length} inches x ${furniture.width} inches x ${furniture.height} inches`
+        }));
 
-    //user generated items 
-    const handleNewFurniture = async () => { 
+        setFurnitureOptions(formattedFurniture);
+    } catch (error) {
+        console.error("Error fetching furniture", error);
+    }
+};
 
-    }; 
+    const handleSavedRooms = async () => { 
+
+    };
 
   useEffect(() => {
     handleRooms(); 
-    handleFurniture(); 
+    handleFurniture();  
+    handleSavedRooms(); 
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -128,7 +134,23 @@ const Sidebar = ({ onToolSelect }) => {
     className="block px-3 py-7 z-10 border-black border-2 rounded-4xl hover:opacity-30 font-light text-center"
     onClick={() => setShowRoomListPopup(!showRoomListPopup)}
   >
-    Rooms
+    Dorms
+  </button>
+
+ <button
+    ref={newFurnitureref}
+    className="block px-3 py-7 z-10 border-black border-2 rounded-4xl hover:opacity-30 font-light text-center"
+    onClick={() => setNewFurnitureListPopup(true)}
+    >
+    Add Your Own Furniture
+  </button>
+
+  <button
+    ref={savedRoomref}
+    className="block px-3 py-7 z-10 border-black border-2 rounded-4xl hover:opacity-30 font-light text-center"
+    onClick={() => setSavedRoomListPopup(!savedRoomListPopup)}
+  >
+    Saved
   </button>
 </div>
 
@@ -195,6 +217,16 @@ const Sidebar = ({ onToolSelect }) => {
           <Checklist />
         </div>
       )}
+
+
+{newFurnitureListPopup && (
+    <HandleNewFurniture 
+        onClose={() => {
+            setNewFurnitureListPopup(false); 
+            handleFurniture(); 
+        }} 
+    />
+)}
     </div>
   );
 };

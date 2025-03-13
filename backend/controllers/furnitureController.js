@@ -2,18 +2,21 @@ const Furniture = require("../models/Furniture");
 
 exports.getAllFurniture = async (req, res) => {
     try {
-        const furniture = await Furniture.find();
-        if (!furniture.length) {
-            return res.status(404).json({ message: "No furniture found." });
-        }
+        const { username } = req.query; 
+
+        const query = username ? { $or: [{ user: username }, { user: "All" }] } : {};
+
+        const furniture = await Furniture.find(query);
+
         res.json(furniture);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+    } catch (error) {
+        console.error("Error fetching furniture", error);
+        res.status(500).json({ message: "Failed to fetch furniture" });
     }
 };
 
 exports.addFurniture = async (req, res) => {
-    const { name, length, width, height, image } = req.body;
+    const { name, length, width, height, image, user} = req.body;
 
     // Check for missing fields
     if (!name || !length || !width || !height || !image) {
@@ -21,7 +24,7 @@ exports.addFurniture = async (req, res) => {
     }
 
     try {
-        const newFurniture = new Furniture({ name, length, width, height, image });
+        const newFurniture = new Furniture({ name, length, width, height, image, user});
         await newFurniture.save();
         res.status(201).json(newFurniture);
     } catch (err) {

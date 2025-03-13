@@ -17,6 +17,7 @@ const furnitureSchema = new mongoose.Schema({
     width: { type: Number, required: true },
     height: { type: Number, required: true },
     image: { type: String, required: true },
+    user: { type: String, required: true, default: "All" } 
 });
 
 module.exports = mongoose.model("userFurniture", furnitureSchema);
