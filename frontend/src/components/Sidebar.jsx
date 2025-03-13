@@ -103,9 +103,6 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
       return;
     }
     const userName = window.sessionStorage.getItem("userName");
-    if(!userName){
-      return alert("Log in to save rooms.");
-    }
     try{
       const response = await fetch(`http://localhost:5001/api/designs/${userName}`);
 
@@ -145,65 +142,88 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
     furniture.label.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const IconButton = ({ ref, onClick, imgSrc, altText, buttonText, imgClassName }) => (
+    <button
+      ref={ref}
+      className="flex flex-col items-center justify-center p-4 border-2 border-black rounded-4xl hover:opacity-30 transition-opacity"
+      onClick={onClick}
+    >
+      <img src={imgSrc} alt={altText} className={imgClassName} />
+      <span className="mt-2 text-sm font-light">{buttonText}</span>
+    </button>
+  );
+
   return (
     <div
       ref={sidebarRef}
       className="w-64 bg-gray-300 shadow-md p-4 border-b-amber-950 border-1"
     >
-      <div className="flex flex-col items-center gap-1 mb-2 px-25 py-30 border-1 bg-blue-300 rounded-4xl">
-  <button
-    ref={objectsButtonRef}
-    className="block px-3 py-7 z-10 border-black border-2 rounded-4xl hover:opacity-30 font-light text-center"
-    onClick={() => {PopupClose(); 
-        setShowObjectsPopup(!showObjectsPopup);}}
-  >
-    <img src="/armchair.png"/>
-  </button>
+      <div className="flex flex-col items-center gap-4 p-6 bg-blue-300 rounded-4xl border border-black">
+      {/* Furniture Button */}
+      <IconButton
+        ref={objectsButtonRef}
+        onClick={() => {
+          PopupClose();
+          setShowObjectsPopup(!showObjectsPopup);
+        }}
+        imgSrc="/armchair.png"
+        altText="Furniture"
+        buttonText="Furniture"
+        imgClassName="w-16 h-auto"
+      />
 
-  <div className="py-3"></div>
+      {/* Checklist Button */}
+      <IconButton
+        ref={checklistButtonRef}
+        onClick={() => {
+          PopupClose();
+          setShowChecklistPopup(!showChecklistPopup);
+        }}
+        imgSrc="/to-do-list.png"
+        altText="Checklist"
+        buttonText="Checklist"
+        imgClassName="w-16 h-16"
+      />
 
-  <button
-    ref={checklistButtonRef}
-    className="block px-3 py-7 z-10 border-black border-2 rounded-4xl hover:opacity-30 font-light text-center"
-    onClick={() => {
-         PopupClose(); 
-         setShowChecklistPopup(!showChecklistPopup);}}
-  >
-    Checklist
-  </button>
+      {/* Dorms Button */}
+      <IconButton
+        ref={roomButtonRef}
+        onClick={() => {
+          PopupClose();
+          setShowRoomListPopup(!showRoomListPopup);
+        }}
+        imgSrc="/floor.png"
+        altText="Dorms"
+        buttonText="Dorms"
+        imgClassName="w-10 h-10"
+      />
 
-  <div className="py-3"></div>
+      {/* Add Button */}
+      <IconButton
+        ref={newFurnitureref}
+        onClick={() => {
+          PopupClose();
+          setNewFurnitureListPopup(true);
+        }}
+        imgSrc="/more.png"
+        altText="Add"
+        buttonText="Add"
+        imgClassName="w-10 h-10"
+      />
 
-  <button
-    ref={roomButtonRef}
-    className="block px-3 py-7 z-10 border-black border-2 rounded-4xl hover:opacity-30 font-light text-center"
-    onClick={() => {
-        PopupClose(); 
-        setShowRoomListPopup(!showRoomListPopup);}}
-  >
-    Dorms
-  </button>
-
- <button
-    ref={newFurnitureref}
-    className="block px-3 py-7 z-10 border-black border-2 rounded-4xl hover:opacity-30 font-light text-center"
-    onClick={() => {
-        PopupClose(); 
-        setNewFurnitureListPopup(true);}}
-    >
-    Add Your Own Furniture
-  </button>
-
-  <button
-    ref={savedRoomref}
-    className="block px-3 py-7 z-10 border-black border-2 rounded-4xl hover:opacity-30 font-light text-center"
-    onClick={() => {
-        PopupClose(); 
-        setSavedRoomListPopup(!savedRoomListPopup);}}
-  >
-    Saved
-  </button>
-</div>
+      {/* Saved Button */}
+      <IconButton
+        ref={savedRoomref}
+        onClick={() => {
+          PopupClose();
+          setSavedRoomListPopup(!savedRoomListPopup);
+        }}
+        imgSrc="/bookmark.png"
+        altText="Saved"
+        buttonText="Saved"
+        imgClassName="w-10 h-10"
+      />
+    </div>
 
 {/* Room List Popup */}
 {showRoomListPopup && (
