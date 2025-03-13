@@ -17,7 +17,7 @@ const HeartButton = ({ designId }) => {
       }
     };
     
-    if (userName && designId) checkSavedStatus();
+    if (userName && (loggedIn === "true") && designId) checkSavedStatus();
   }, [designId, userName]);
 
   const handleSave = async () => {
