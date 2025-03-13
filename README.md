@@ -18,17 +18,23 @@ This is a full-stack web application project built with a **React frontend** and
 # Features
 
 1. Checklist of What to Bring
-This feature generates a comprehensive, customizable checklist tailored to the specific room layout and furniture selected by the user. It ensures that individuals know exactly what items they need, from essentials like bedding and kitchenware to optional decor items. The checklist could be dynamically updated as users make adjustments to their room design, reflecting changes in required items.
-2. Database of Common Room Designs
-The database will include a curated collection of popular room layouts and designs based on real-world examples from UCLA dorms and other comparable spaces. Each design will come with a breakdown of default furniture placement of decor and furniture.
-3. Reviews of Common Room Designs
-Users will have the ability to review and provide feedback on existing room designs in the database. Reviews can highlight the pros and cons of specific layouts, such as their practicality, comfort, or aesthetic appeal. This feature also allows new users to browse highly-rated designs and make more informed choices when selecting a template. Additionally, users could filter room designs based on reviews or specific keywords.
+This feature generates a comprehensive, customizable checklist. It ensures that individuals know exactly what items they need, from essentials like bedding and kitchenware to optional decor items. The checklist could be dynamically updated as users make adjustments to their room design, reflecting changes in required items.
+
+2. User Can Meaningfully Search Through Server Data.
+The database will include a curated collection of popular room layouts and designs based on real-world examples from UCLA dorms and other comparable spaces. Each design will come with a breakdown of default furniture that is already in the room upon arrival.
+
+3. App Can Display Dynamic Data to the User.
+Users will have the ability to review and save existing room designs in the database. This feature will also display the current templates of each design allowing new users to browse user generated designs and make more informed choices when selecting a template.
+
 4. Search for Room Design
-A search function will enable users to quickly find room designs that match their preferences. Users can filter and sort designs based on criteria such as room size, furniture type, budget, or aesthetic themes.
-5. Users Are Allowed to Create Their Own Items
-This feature empowers users to define custom items within the room design tool. Users can specify details like the dimensions and function of an item. These custom items can then be saved and integrated into their room designs for future use.
+A search function will enable users to quickly find room types that match their choices or assigned rooms for the year. Users can filter and sort these rooms based on criteria such as room type, occupation size, and size. 
+
+5. Users Can Upload Data to the Back-end
+This feature empowers users to define custom items within the room design tool. Users can specify details like the dimensions and design of an item. These custom items can then be saved and integrated into their room designs and database for future use. 
+
 6. Allow Users to Sign In
-Implementing a sign-in system will allow users to save their designs, preferences, and checklists across sessions. 
+Implementing a sign-in system will allow users to save their designs, preferences, and checklists across sessions. This keeps an accurate and up-to-date database of all user information.
+
 7. Prices for Dorms
 Our project will include a database of UCLA dorm rooms with associated pricing information. Users can compare dorm options based on their budget and see how each layout aligns with their design preferences. 
 

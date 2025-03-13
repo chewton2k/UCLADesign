@@ -254,7 +254,7 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
           }}
           imgSrc="/list.png"
           altText="Saved"
-          buttonText="Saved"
+          buttonText="Task List"
         />
       </div>
 
