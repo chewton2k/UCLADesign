@@ -157,7 +157,7 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
     onClick={() => {PopupClose(); 
         setShowObjectsPopup(!showObjectsPopup);}}
   >
-    Furniture
+    <img src="/armchair.png"/>
   </button>
 
   <div className="py-3"></div>
