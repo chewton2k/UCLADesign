@@ -129,8 +129,8 @@ const Sidebar = ({ onToolSelect }) => {
   <button
     ref={objectsButtonRef}
     className="block px-3 py-7 z-10 border-black border-2 rounded-4xl hover:opacity-30 font-light text-center"
-    onClick={() => setShowObjectsPopup(!showObjectsPopup)}
-    onClose= {() => setSearchQuery("")}
+    onClick={() => {PopupClose(); 
+        setShowObjectsPopup(!showObjectsPopup);}}
   >
     Furniture
   </button>
@@ -140,7 +140,9 @@ const Sidebar = ({ onToolSelect }) => {
   <button
     ref={checklistButtonRef}
     className="block px-3 py-7 z-10 border-black border-2 rounded-4xl hover:opacity-30 font-light text-center"
-    onClick={() => setShowChecklistPopup(!showChecklistPopup)}
+    onClick={() => {
+         PopupClose(); 
+         setShowChecklistPopup(!showChecklistPopup);}}
   >
     Checklist
   </button>
@@ -150,8 +152,9 @@ const Sidebar = ({ onToolSelect }) => {
   <button
     ref={roomButtonRef}
     className="block px-3 py-7 z-10 border-black border-2 rounded-4xl hover:opacity-30 font-light text-center"
-    onClick={() => setShowRoomListPopup(!showRoomListPopup)}
-    onClose= {() => setSearchQuery("")}
+    onClick={() => {
+        PopupClose(); 
+        setShowRoomListPopup(!showRoomListPopup);}}
   >
     Dorms
   </button>
@@ -159,7 +162,9 @@ const Sidebar = ({ onToolSelect }) => {
  <button
     ref={newFurnitureref}
     className="block px-3 py-7 z-10 border-black border-2 rounded-4xl hover:opacity-30 font-light text-center"
-    onClick={() => setNewFurnitureListPopup(true)}
+    onClick={() => {
+        PopupClose(); 
+        setNewFurnitureListPopup(true);}}
     >
     Add Your Own Furniture
   </button>
@@ -167,7 +172,9 @@ const Sidebar = ({ onToolSelect }) => {
   <button
     ref={savedRoomref}
     className="block px-3 py-7 z-10 border-black border-2 rounded-4xl hover:opacity-30 font-light text-center"
-    onClick={() => setSavedRoomListPopup(!savedRoomListPopup)}
+    onClick={() => {
+        PopupClose(); 
+        setSavedRoomListPopup(!savedRoomListPopup);}}
   >
     Saved
   </button>
