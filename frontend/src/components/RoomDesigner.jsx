@@ -38,13 +38,6 @@ export default function RoomDesigner() {
             } else {
                 alert("Please place a room first before adding objects.");
             }
-            const newObject = {
-                id: Date.now(),
-                src: imagePath,
-                x: offsetX,
-                y: offsetY
-            };
-            setObjects(prev => [...prev, newObject]);
         }
     };
 
