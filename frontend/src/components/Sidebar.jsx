@@ -103,6 +103,9 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
       return;
     }
     const userName = window.sessionStorage.getItem("userName");
+    if(!userName){
+      return alert("Log in to save rooms.");
+    }
     try{
       const response = await fetch(`http://localhost:5001/api/designs/${userName}`);
 
