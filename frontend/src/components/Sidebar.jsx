@@ -54,6 +54,23 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
     }
   };
 
+  const handleDeleteDesign = async (designId) => {
+    
+    try {
+      const response = await fetch(`http://localhost:5001/api/designs/delete/${designId}`, { 
+        method: "DELETE"
+    });
+    if (!response.ok) {
+      throw new Error("Failed to delete design");
+    }
+      const newDesigns = savedDesigns.filter(design => design._id !== designId);
+      setSavedDesigns(newDesigns);
+
+    } catch (error) {
+      console.error("Error deleting design: ", error);
+    }
+  };
+
   const handleRooms = async () => {
     try {
       const response = await fetch("http://localhost:5001/api/dorms/");
@@ -347,15 +364,23 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
            <li className="text-sm text-gray-500"> No saved designs found. </li>
          ) : (
            savedDesigns.map((design, idx) => (
-             <li 
-               key={design._id}
-               onClick={() => {
-                 loadDesign(design.layout);
-                 setSavedRoomListPopup(false);
-               }} 
-               className="text-sm text-gray-700">
-               Design #{idx+1} 
-             </li>
+            <li key={design._id} className="text-sm text-gray-700 flex justify-between items-center">
+            <span 
+              onClick={() => {
+                loadDesign(design.layout);
+                setSavedRoomListPopup(false);
+              }} 
+              className="cursor-pointer hover:underline"
+            >
+              Design #{idx + 1} 
+            </span>
+            <button 
+              onClick={async() => await handleDeleteDesign(design._id)} 
+              className="text-red-500 text-xs ml-4 px-2 py-1 border border-red-500 rounded hover:bg-red-500 hover:text-white"
+            >
+              Delete
+            </button>
+          </li>
            ))
          )}
          </ul>
