@@ -132,7 +132,7 @@ const RegistrationForm = ({ formType }) => {
                 </p>
                 <p className="text-md text-white">
                     Don't have an account?
-                    <a href="/signup" className="text-blue-500 font-md hover:underline ml-1"> 
+                    <a href="/signup" className="text-blue-500 font-semibold hover:underline ml-1"> 
                      Sign up!
                     </a>
                 </p>
