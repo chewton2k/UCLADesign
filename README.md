@@ -101,11 +101,11 @@ http://localhost:5173/
 
 UCLADesign was made as a project for CS 35L taught by Professor Paul Eggert at UCLA in Winter 2025. Made by: Charlton Shih, Tommy Yu, Alex De La Cueva Tamanaha, Owen Fan, Fiona Zhang.
 
-**GitHub Usernames to Real: 
-chewton2k: Charlton Shih
-alexdlct: Alex De La Cueva Tamanaha
-Fiona TZ: Fiona Zhang
-Tommy: Tommy Yu
-owenrfn: Owen Fan 
-Charlton Shih: Charlton Shih
-tommy: Tommy Yu
+**GitHub Usernames to Real:**  <br/>
+chewton2k: Charlton Shih <br/>
+alexdlct: Alex De La Cueva Tamanaha <br/>
+Fiona TZ: Fiona Zhang <br/>
+Tommy: Tommy Yu <br/>
+owenrfn: Owen Fan  <br/>
+Charlton Shih: Charlton Shih <br/>
+tommy: Tommy Yu <br/>
