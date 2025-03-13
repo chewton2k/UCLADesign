@@ -80,8 +80,8 @@ const PlanExpSection = () => {
         {/* Image on the left */}
         <div className="flex items-center justify-center lg:justify-end z-10 drop-shadow-2xl mb-8 lg:mb-0 lg:px-25">
           <img
-            src="/image10.png"
-            alt="De Neve Plaza Layout"
+            src="/plaza_v2.jpg"
+            alt="Room Layout"
             className="w-64 h-64 sm:w-80 sm:h-80 lg:w-100 lg:h-100 rounded-lg border border-black shadow-5xl"
           />
         </div>
