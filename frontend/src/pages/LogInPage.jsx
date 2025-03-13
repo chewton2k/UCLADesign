@@ -9,7 +9,7 @@ const LogInPage = () => {
             <HomePageTop/> 
             <main className = "flex-grow"> 
             <LogInForm/>
-            <div className="py-10"></div>
+            <div className="py-25"></div>
             </main>
             <HomePageBottom/>
         </div>
