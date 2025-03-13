@@ -2,8 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import Checklist from "./Checklist";
 import SearchBar from "./SearchBar";
 import HandleNewFurniture from "./HandleNewFurniture";
+import RoomDesigner from "./RoomDesigner"
 
-const Sidebar = ({ onToolSelect }) => {
+const Sidebar = ({ onToolSelect, loadDesign }) => {
     const [showObjectsPopup, setShowObjectsPopup] = useState(false);
     const [showChecklistPopup, setShowChecklistPopup] = useState(false);
     const [showRoomListPopup, setShowRoomListPopup] = useState(false);
@@ -12,6 +13,7 @@ const Sidebar = ({ onToolSelect }) => {
     const [savedRoomListPopup, setSavedRoomListPopup] = useState(false); 
     const [newFurnitureListPopup, setNewFurnitureListPopup] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
+    const [savedDesigns, setSavedDesigns] = useState([]);
 
     const savedRoomref = useRef(null); 
     const sidebarRef = useRef(null);
@@ -22,12 +24,14 @@ const Sidebar = ({ onToolSelect }) => {
     const checklistPopupRef = useRef(null);
     const roomPopupRef = useRef(null);
     const newFurnitureref = useRef(null); 
+    const savedPopupRef = useRef(null);
   
     const PopupClose = () => {
       setShowChecklistPopup(false);
       setShowObjectsPopup(false);
       setShowRoomListPopup(false);
       setSearchQuery(""); 
+      setSavedRoomListPopup(false);
     };
   
     const handleClickOutside = (event) => {
@@ -37,7 +41,9 @@ const Sidebar = ({ onToolSelect }) => {
         !roomButtonRef.current.contains(event.target) &&
         !objectsPopupRef.current?.contains(event.target) &&
         !checklistPopupRef.current?.contains(event.target) &&
-        !roomPopupRef.current?.contains(event.target)
+        !roomPopupRef.current?.contains(event.target) &&
+        !savedPopupRef.current?.contains(event.target) &&
+        !savedRoomref.current.contains(event.target)
       ) {
         PopupClose();
       }
@@ -90,13 +96,32 @@ const Sidebar = ({ onToolSelect }) => {
     }
 };
 
-    const handleSavedRooms = async () => { 
-        try{
-          const response = await fetch(`http://localhost:5001/api/designs/getDesigns/`);
-        }catch(error){
-          console.error("Error fetching saved room designs: ", error);
-        }
-    };
+  const handleSavedRooms = async () => { 
+    {/* if the popup is open already close it */}
+    if(savedRoomListPopup){
+      setSavedRoomListPopup(false);
+      return;
+    }
+    const userName = window.sessionStorage.getItem("userName");
+    if(!userName){
+      return alert("Log in to save rooms.");
+    }
+    try{
+      const response = await fetch(`http://localhost:5001/api/designs/${userName}`);
+
+      if(!response.ok){
+        throw new Error("Failed to fetch saved designs");
+      }
+
+      const data = await response.json();
+
+      console.log("Svaed designs response", data);
+      setSavedDesigns(data);
+      setSavedRoomListPopup(prev => !prev);
+    } catch(error){
+        console.error("Error fetching saved room designs: ", error);
+    }
+};
 
   useEffect(() => {
     handleRooms(); 
@@ -132,7 +157,7 @@ const Sidebar = ({ onToolSelect }) => {
     onClick={() => {PopupClose(); 
         setShowObjectsPopup(!showObjectsPopup);}}
   >
-    Furniture
+    <img src="/armchair.png"/>
   </button>
 
   <div className="py-3"></div>
@@ -276,6 +301,29 @@ const Sidebar = ({ onToolSelect }) => {
         }} 
     />
 )}
+
+{savedRoomListPopup && (
+   <div ref={savedPopupRef} className="absolute top-20 left-64 bg-white border p-4 rounded shadow-md z-10 max-h-[300px] overflow-y-auto">
+      <h3 className="text-md font-bold mb-2">Saved Designs</h3>
+      <ul className="space-y-2">
+        {savedDesigns.length === 0 ? (
+          <li className="text-sm text-gray-500"> No saved designs found. </li>
+        ) : (
+          savedDesigns.map((design, idx) => (
+            <li 
+              key={design._id}
+              onClick={() => {
+                loadDesign(design.layout);
+                setSavedRoomListPopup(false);
+              }} 
+              className="text-sm text-gray-700">
+              Design #{idx+1} 
+            </li>
+          ))
+        )}
+        </ul>
+        </div>
+        )}
     </div>
   );
 };
