@@ -63,7 +63,7 @@ const HandleNewFurniture = ({ onClose }) => {
     };
 
     return (
-        <div className="fixed top-0 left-0 w-full h-full bg-amber-10 flex items-center justify-center z-50">
+        <div className="bg-amber-10 flex items-center justify-center z-50">
             <div className="bg-white p-6 rounded-lg shadow-lg w-[400px]">
                 <h2 className="text-xl font-bold mb-4">Add New Furniture</h2>
 
@@ -108,13 +108,6 @@ const HandleNewFurniture = ({ onClose }) => {
                             className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
                         >
                             Submit
-                        </button>
-                        <button
-                            type="button"
-                            onClick={onClose}
-                            className="bg-gray-400 text-white py-2 px-4 rounded hover:bg-gray-500"
-                        >
-                            Cancel
                         </button>
                     </div>
                 </form>

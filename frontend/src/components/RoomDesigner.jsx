@@ -148,27 +148,27 @@ export default function RoomDesigner({ objects, setObjects }) {
     };
 
     
-    const gridSize = 15;
+    const gridSize = 10;
 
     return (
         <div className="p-4">
-            <h1 className="text-2xl font-bold mb-4">Room Designer</h1>
+            <h1 className="text-2xl font-bold mb-1">Room Designer</h1>
             
             <button
                 onClick={handleSave}
-                className="mb-4 px-4 bg-blue-600 text-white rounded hover:bg-blue-700"
+                className="mb-4 px-4 mx-2 bg-blue-600 text-white rounded hover:bg-blue-700"
             >
                 Save Room
             </button>
             <button
                 onClick={handleClearAll}
-                className="mb-4 px-4 bg-red-600 text-white rounded hover:bg-red-700"
+                className="mb-4 px-4 mx-2 bg-red-600 text-white rounded hover:bg-red-700"
             >
                 Clear All
             </button>
             <button
                 onClick={handleClearRoom}
-                className="mb-4 px-4 bg-red-600 text-white rounded hover:bg-red-700"
+                className="mb-4 px-4 mx-2 bg-red-600 text-white rounded hover:bg-red-700"
             >
                 Clear Room
             </button>
@@ -176,7 +176,7 @@ export default function RoomDesigner({ objects, setObjects }) {
                 ref={containerRef}
                 onDrop={handleDrop}
                 onDragOver={handleDragOver}
-                className="relative w-full h-[800px] bg-white border grid-bg"
+                className="relative w-full h-[850px] bg-white border grid-bg"
             >     
                 {/* Drag And Drop */}
                 {objects.map((obj) => {
@@ -225,7 +225,7 @@ export default function RoomDesigner({ objects, setObjects }) {
                     className="px-2 py-1 bg-red-500 text-white rounded w-full"
                     onClick={() => handleDelete(selectedObjectId)}
                 >
-                    Delete
+                    <img src="/trash.png" className="w-6 h-6 mx-auto"/>
                 </button>
                 </div>
             )}

@@ -36,6 +36,7 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
     setSearchQuery("");
     setSavedRoomListPopup(false);
     setlistToDo(false); 
+    setNewFurnitureListPopup(false); 
   };
 
   const handleClickOutside = (event) => {
@@ -48,7 +49,8 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
       !checklistPopupRef.current?.contains(event.target) &&
       !roomPopupRef.current?.contains(event.target) &&
       !savedPopupRef.current?.contains(event.target) &&
-      !savedRoomref.current.contains(event.target)
+      !savedRoomref.current.contains(event.target) && 
+      !newFurnitureListPopup.curren.contains(event.target)
     ) {
       PopupClose();
     }
@@ -180,7 +182,7 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
   return (
     <div
       ref={sidebarRef}
-      className="w-64 h-220 bg-gray-300 shadow-lg border py-30 rounded-4xl border-black"
+      className="w-64 h-200 bg-gray-300 shadow-lg border py-15 rounded-4xl border-black mt-25"
     >
       <div className="flex flex-col items-center gap-4">
         {/* Furniture Button */}
@@ -224,7 +226,7 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
           ref={newFurnitureref}
           onClick={() => {
             PopupClose();
-            setNewFurnitureListPopup(true);
+            setNewFurnitureListPopup(!newFurnitureListPopup);
           }}
           imgSrc="/more.png"
           altText="Add"
@@ -260,7 +262,7 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
       {showRoomListPopup && (
         <div
           ref={roomPopupRef}
-          className="absolute top-20 left-64 bg-white border p-4 rounded-lg shadow-md z-10 w-64"
+          className="absolute top-50 left-64 bg-white border p-4 rounded-lg shadow-md z-10 w-64"
         >
           <input
             type="text"
@@ -347,17 +349,17 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
 
       {/* New Furniture Popup */}
       {newFurnitureListPopup && (
-        <HandleNewFurniture
-          onClose={() => {
-            setNewFurnitureListPopup(false);
-            handleFurniture();
-          }}
-        />
+                <div
+                ref={newFurnitureref}
+                className="absolute top-115 left-64 bg-white border p-4 rounded-lg shadow-md z-10 w-120"
+              >
+        <HandleNewFurniture/>
+        </div>
       )}
 
       {/* Saved Designs Popup */}
       {savedRoomListPopup && (
-    <div ref={savedPopupRef} className="absolute top-20 left-64 bg-white border p-4 rounded shadow-md z-10 max-h-[300px] overflow-y-auto">
+    <div ref={savedPopupRef} className="absolute top-140 left-64 bg-white border p-4 rounded shadow-md z-10 max-h-[300px] max-w-[300px] overflow-y-auto">
        <h3 className="text-md font-bold mb-2">Saved Designs</h3>
        <ul className="space-y-2">
          {savedDesigns.length === 0 ? (
