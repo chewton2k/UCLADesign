@@ -88,6 +88,12 @@ Run the whole project:
    npm start
    ```
 
+The project will have two local hosts: 
+- This port for the backend, this will contains all the api endpoints with access to the database
+http://localhost:5001 
+- This port is for the frontend, that utilizes vite, this will contain all the frontend/visual designs for the project
+http://localhost:5173/
+
 # Authors: 
 
 UCLADesign was made as a project for CS 35L taught by Professor Paul Eggert at UCLA in Winter 2025. Made by: Charlton Shih, Tommy Yu, Alex De La Cueva Tamanaha, Owen Fan, Fiona Zhang.
