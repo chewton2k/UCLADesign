@@ -157,7 +157,7 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
   return (
     <div
       ref={sidebarRef}
-      className="w-64 bg-gray-100 shadow-lg p-4 border-r border-gray-300"
+      className="w-64 h-220 bg-gray-300 shadow-lg border py-30 rounded-4xl border-black"
     >
       <div className="flex flex-col items-center gap-4">
         {/* Furniture Button */}
@@ -234,7 +234,7 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
             placeholder="Search rooms..."
             className="w-full p-2 border rounded-md mb-2"
           />
-          <div className="grid grid-cols-1 gap-4 max-h-64 overflow-y-auto">
+          <div className="grid grid-cols-1 gap-4 max-h-150 overflow-y-auto">
             {filteredRoomOptions.map((room) => (
               <div
                 key={room.type}
@@ -274,7 +274,7 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
             placeholder="Search furniture..."
             className="w-full p-2 border rounded-md mb-2"
           />
-          <div className="grid grid-cols-1 gap-4 max-h-64 overflow-y-auto">
+          <div className="grid grid-cols-1 gap-4 max-h-150 overflow-y-auto">
             {filteredFurnitureOptions.map((furniture) => (
               <div
                 key={furniture.type}
