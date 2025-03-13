@@ -51,27 +51,25 @@ const Checklist = () => {
             item.id === id ? { ...item, checked: !item.checked } : item
         );
 
-        setItems([...updatedItems].sort((a, b) => a.checked - b.checked)); // Sort so unchecked appear first
+        setItems([...updatedItems].sort((a, b) => a.checked - b.checked)); 
     };
 
-    // Add a new item to the appropriate list (essentials or optionals)
     const addItem = () => {
         if (newItem.trim()) {
             const setItems = isAddingToOptional ? setOptionalItems : setItems;
             const currentItems = isAddingToOptional ? optionalItems : items;
 
             const newEntry = { id: Date.now(), text: newItem, checked: false };
-            setItems([...currentItems, newEntry]); // Add new item to the list
-            setNewItem(''); // Clear the input field
+            setItems([...currentItems, newEntry]); 
+            setNewItem(''); 
         }
     };
 
-    // Delete an item from the appropriate list
     const deleteItem = (id, isOptional) => {
         const setItems = isOptional ? setOptionalItems : setItems;
         const currentItems = isOptional ? optionalItems : items;
 
-        setItems(currentItems.filter(item => item.id !== id)); // Remove item with matching ID
+        setItems(currentItems.filter(item => item.id !== id));
     };
 
     return (
@@ -116,11 +114,11 @@ const Checklist = () => {
                                 <input
                                     type="checkbox"
                                     checked={item.checked}
-                                    onChange={() => toggleCheck(item.id, false)} // Toggle for Essentials
+                                    onChange={() => toggleCheck(item.id, false)}
                                     className="ml-2 h-5 w-5 cursor-pointer"
                                 />
                                 <button
-                                    onClick={() => deleteItem(item.id, false)} // Delete for Essentials
+                                    onClick={() => deleteItem(item.id, false)}
                                     className="ml-2 px-2 py-1 bg-red-500 text-white rounded-md hover:bg-red-600"
                                 >
                                     Delete
