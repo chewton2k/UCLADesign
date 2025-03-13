@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 export default function RoomDesigner() {
     const [objects, setObjects] = useState([]);
@@ -10,6 +10,7 @@ export default function RoomDesigner() {
         const imagePath = e.dataTransfer.getData("text/plain");
         const containerRect = containerRef.current.getBoundingClientRect();
     
+        // Calculate relative position within container
         let offsetX = e.clientX - containerRect.left;
         let offsetY = e.clientY - containerRect.top;
     
@@ -37,6 +38,13 @@ export default function RoomDesigner() {
             } else {
                 alert("Please place a room first before adding objects.");
             }
+            const newObject = {
+                id: Date.now(),
+                src: imagePath,
+                x: offsetX,
+                y: offsetY
+            };
+            setObjects(prev => [...prev, newObject]);
         }
     };
 
@@ -115,6 +123,35 @@ export default function RoomDesigner() {
         }
     };
 
+    //Popup handler state
+    const [selectedObjectId, setSelectedObjectId] = useState(null);
+    const [rotationAngles, setRotationAngles] = useState({});
+    const popupRef = useRef(null);
+
+    //click outside popup = close
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if(popupRef.current && !popupRef.current.contains(e.target)){
+                setSelectedObjectId(null);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return() => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
+    const handleRotate = (id) => {
+        setRotationAngles((prev) => ({
+            ...prev,
+            [id]: ((prev[id] || 0) + 90) % 360,
+        }));
+    };
+
+    const handleDelete = (id) => {
+        setObjects((prev) => prev.filter((obj) => obj.id !== id));
+        setSelectedObjectId(null);
+    };
+
+    
     const gridSize = 15;
 
     return (
@@ -144,24 +181,49 @@ export default function RoomDesigner() {
                 onDrop={handleDrop}
                 onDragOver={handleDragOver}
                 className="relative w-full h-[800px] bg-white border grid-bg"
-            >
-                {objects.map((obj) => (
-                    <img
-                    key={obj.id}
-                    src={obj.src}
-                    alt="room"
-                    className="absolute cursor-pointer"
-                    style={{
-                        left: obj.x,
-                        top: obj.y,
-                        transform: 'translate(-50%, -50%)',
-                        maxWidth: '100%',
-                        maxHeight: '100%'
-                    }}
-                    draggable
-                    onDragStart={(e) => handleObjectDragStart(e, obj.id)}
+            >     
+            {/* Drag And Drop */}
+            {objects.map((obj) => (
+                <img
+                key={obj.id}
+                src={obj.src}
+                alt="room-object"
+                className="absolute cursor-pointer"
+                style={{
+                    left: obj.x,
+                    top: obj.y,
+                    transform: `translate(-50%, -50%) rotate(${rotationAngles[obj.id] || 0}deg)`
+                }}
+                draggable
+                onClick={() => setSelectedObjectId(obj.id)}
+                onDragStart={(e) => handleObjectDragStart(e, obj.id)}
                 />
-                ))}
+            ))}
+
+            {/* Popup */}
+            {selectedObjectId !== null && (
+                <div
+                ref={popupRef}
+                className="absolute bg-white p-2 border rounded shadow-md z-50"
+                style={{
+                    left: objects.find((obj) => obj.id === selectedObjectId)?.x + 60,
+                    top: objects.find((obj) => obj.id === selectedObjectId)?.y,
+                }}
+                >
+                <button
+                    className="px-2 py-1 bg-blue-500 text-white rounded mb-2 w-full"
+                    onClick={() => handleRotate(selectedObjectId)}
+                >
+                    Rotate 90°
+                </button>
+                <button
+                    className="px-2 py-1 bg-red-500 text-white rounded w-full"
+                    onClick={() => handleDelete(selectedObjectId)}
+                >
+                    Delete
+                </button>
+                </div>
+            )}
             </div>
 
             <style jsx>{`
