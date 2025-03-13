@@ -89,7 +89,11 @@ const Sidebar = ({ onToolSelect }) => {
 };
 
     const handleSavedRooms = async () => { 
-
+        try{
+          const response = await fetch(`http://localhost:5001/api/designs/getDesigns/`);
+        }catch(error){
+          console.error("Error fetching saved room designs: ", error);
+        }
     };
 
   useEffect(() => {
@@ -232,6 +236,3 @@ const Sidebar = ({ onToolSelect }) => {
 };
 
 export default Sidebar;
-
-
-

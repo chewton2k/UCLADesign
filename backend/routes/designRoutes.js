@@ -4,8 +4,8 @@ const {   saveDesign, getDesignsByUser, getAllDesigns, updateDesignById, deleteD
 
 router.post("/", saveDesign);
 router.get("/:userId", getDesignsByUser);
-router.get("/", getAllDesigns);
-router.put("/:id", updateDesignById);
-router.delete("/:id", deleteDesignById);
+router.get("/getDesigns/", getAllDesigns);
+router.put("/update/:id", updateDesignById);
+router.delete("/delete/:id", deleteDesignById);
 
 module.exports = router;
