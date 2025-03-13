@@ -49,21 +49,7 @@ const TemplateGrid = () => {
                                     const rotation = obj.rotation || 0; // Optional rotation field
 
                                     return (
-                                        <img
-                                            key={obj.id}
-                                            src={obj.src}
-                                            alt="room-object"
-                                            className="absolute"
-                                            style={{
-                                                left: `${left}px`,
-                                                top: `${top}px`,
-                                                width: "30px",
-                                                height: "30px",
-                                                objectFit: "contain",
-                                                transform: `translate(-50%, -50%) rotate(${rotation}deg)`,
-                                                zIndex: idx === 0 ? 0 : 1 // Room schematic as background layer
-                                            }}
-                                        />
+                                        <div> Design </div> 
                                     );
                                 })}
                             </div>
