@@ -58,10 +58,33 @@ const deleteDesignById = async (req, res) => {
   }
 };
 
+const saveDesignForUser = async (req, res) => {
+  const { userName, savedFrom } = req.body;
+
+  try {
+      const existingDesign = await Design.findById(savedFrom);
+      if (!existingDesign) {
+          return res.status(404).json({ message: "Original design not found." });
+      }
+
+      const newDesign = new Design({
+          userName, 
+          layout: existingDesign.layout, 
+          createdBy: existingDesign.createdBy
+      });
+
+      await newDesign.save();
+      res.status(200).json({ message: "Design saved successfully!" });
+  } catch (error) {
+      res.status(500).json({ message: "Error saving design.", error });
+  }
+};
+
 module.exports = {
   saveDesign,
   getDesignsByUser,
   getAllDesigns,
   updateDesignById,
-  deleteDesignById
+  deleteDesignById, 
+  saveDesignForUser
 };
