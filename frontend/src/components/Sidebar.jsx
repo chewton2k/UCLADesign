@@ -98,28 +98,29 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
     }
   };
 
-  const handleSavedRooms = async () => {
-    if (savedRoomListPopup) {
+  const handleSavedRooms = async () => { 
+    {/* if the popup is open already close it */}
+    if(savedRoomListPopup){
       setSavedRoomListPopup(false);
       return;
     }
     const userName = window.sessionStorage.getItem("userName");
-    try {
+    try{
       const response = await fetch(`http://localhost:5001/api/designs/${userName}`);
 
-      if (!response.ok) {
+      if(!response.ok){
         throw new Error("Failed to fetch saved designs");
       }
 
       const data = await response.json();
 
-      console.log("Saved designs response", data);
+      console.log("Svaed designs response", data);
       setSavedDesigns(data);
-      setSavedRoomListPopup((prev) => !prev);
-    } catch (error) {
-      console.error("Error fetching saved room designs: ", error);
+      setSavedRoomListPopup(prev => !prev);
+    } catch(error){
+        console.error("Error fetching saved room designs: ", error);
     }
-  };
+};
 
   useEffect(() => {
     handleRooms();
@@ -322,31 +323,27 @@ const Sidebar = ({ onToolSelect, loadDesign }) => {
 
       {/* Saved Designs Popup */}
       {savedRoomListPopup && (
-        <div
-          ref={savedPopupRef}
-          className="absolute top-20 left-64 bg-white border p-4 rounded-lg shadow-md z-10 w-64 max-h-64 overflow-y-auto"
-        >
-          <h3 className="text-md font-bold mb-2">Saved Designs</h3>
-          <ul className="space-y-2">
-            {savedDesigns.length === 0 ? (
-              <li className="text-sm text-gray-500">No saved designs found.</li>
-            ) : (
-              savedDesigns.map((design, idx) => (
-                <li
-                  key={design._id}
-                  onClick={() => {
-                    loadDesign(design.layout);
-                    setSavedRoomListPopup(false);
-                  }}
-                  className="text-sm text-gray-700 cursor-pointer hover:bg-gray-100 p-2 rounded"
-                >
-                  Design #{idx + 1}
-                </li>
-              ))
-            )}
-          </ul>
-        </div>
-      )}
+    <div ref={savedPopupRef} className="absolute top-20 left-64 bg-white border p-4 rounded shadow-md z-10 max-h-[300px] overflow-y-auto">
+       <h3 className="text-md font-bold mb-2">Saved Designs</h3>
+       <ul className="space-y-2">
+         {savedDesigns.length === 0 ? (
+           <li className="text-sm text-gray-500"> No saved designs found. </li>
+         ) : (
+           savedDesigns.map((design, idx) => (
+             <li 
+               key={design._id}
+               onClick={() => {
+                 loadDesign(design.layout);
+                 setSavedRoomListPopup(false);
+               }} 
+               className="text-sm text-gray-700">
+               Design #{idx+1} 
+             </li>
+           ))
+         )}
+         </ul>
+         </div>
+         )}
     </div>
   );
 };
