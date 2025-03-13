@@ -21,6 +21,7 @@ const saveDesign = async (req, res) => {
 const getDesignsByUser = async (req, res) => {
   try {
     const designs = await Design.find({ userName: req.params.userName });
+    console.log("Design RequestL ", req.params.userName);
     res.status(200).json(designs);
   } catch (error) {
     res.status(500).json({ message: "Failed to fetch designs", error: error.message });
