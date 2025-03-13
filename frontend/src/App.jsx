@@ -7,6 +7,7 @@ import TemplatePage from './pages/TemplatePage.jsx'
 //import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import ProtectedRoutes from './utils/ProtectedRoutes.jsx'
 import CreateDesignPage from "./pages/CreateDesignPage.jsx";
+import TodoListPage from "./pages/TodoListPage.jsx"; 
 
 function App() {
     return (
